@@ -418,11 +418,6 @@ class OBSGetObjectOperator(BaseOperator):
     """
     This operator to Download an OBS object.
 
-    If load_stream_in_memory is True,
-    this operator returns the byte stream of an object,
-    and it will be serialized as a string of utf-8
-    which can be used by 'xcom' in downstream tasks.
-
     :param huaweicloud_conn_id: The Airflow connection used for OBS credentials.
         If this is None or empty then the default obs behaviour is used. If
         running Airflow in a distributed manner and huaweicloud_conn_id is None or
@@ -438,12 +433,12 @@ class OBSGetObjectOperator(BaseOperator):
         the path format must specify the current directory, for example, ./xxx.
     """
     ui_color = "#3298ff"
-    template_fields: Sequence[str] = ("bucket_name", "object_key", "download_path", "load_stream_in_memory")
+    template_fields: Sequence[str] = ("bucket_name", "object_key", "download_path")
 
     def __init__(
             self,
             object_key: str,
-            download_path: str | None = None,
+            download_path: str,
             bucket_name: str | None = None,
             region: str | None = None,
             huaweicloud_conn_id: str | None = "huaweicloud_default",

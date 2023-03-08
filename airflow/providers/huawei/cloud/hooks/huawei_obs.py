@@ -486,7 +486,7 @@ class OBSHook(HuaweiBaseHook):
     def get_object(
         self,
         object_key: str,
-        download_path: str | None = None,
+        download_path: str,
         bucket_name: str | None = None,
     ) -> str:
         """
