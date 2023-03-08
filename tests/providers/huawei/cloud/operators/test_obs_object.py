@@ -109,7 +109,6 @@ class TestOBSGetObjectOperator(unittest.TestCase):
 
     @mock.patch("airflow.providers.huawei.cloud.operators.huawei_obs.OBSHook")
     def test_execute(self, mock_hook):
-        self.operator.load_stream_in_memory = False
         self.operator.download_path = MOCK_DOWNLOAD_PATH
         self.operator.execute(MOCK_CONTEXT)
         mock_hook.return_value.get_object.return_value = None
