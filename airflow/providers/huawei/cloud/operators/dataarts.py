@@ -18,7 +18,7 @@
 """This module contains Huawei Cloud DataArts operators."""
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Sequence
 
 from airflow.models import BaseOperator
 from airflow.providers.huawei.cloud.hooks.dataarts import DataArtsHook
@@ -40,6 +40,9 @@ class DataArtsDLFStartJobOperator(BaseOperator):
     :param huaweicloud_conn_id: The connection ID to use when fetching connection info.
     """
 
+    template_fields: Sequence[str] = ("job_name", "project_id","workspace")
+    ui_color = "#f0eee4"
+    
     def __init__(
         self,
         job_name: str,
