@@ -23,7 +23,7 @@ from typing import Any
 from huaweicloudsdkcore.auth.credentials import GlobalCredentials
 from huaweicloudsdkcore.exceptions import exceptions
 from huaweicloudsdkiam.v3 import IamClient, KeystoneListAuthDomainsRequest
-from utils.signer import send_signed_request  # TODO: import by package name
+from . utils.signer import send_signed_request  # TODO: import by package name
 from airflow.hooks.base import BaseHook
 
 
@@ -116,6 +116,7 @@ class HuaweiBaseHook(BaseHook):
             return False, f"{e.error_code} {e.error_msg}"
 
     def send_request(self, method: str, url: str, body: dict = {}):
+        body = {k: v for k, v in body.items() if v is not None}
         return send_signed_request(
             ak=self.conn.login,
             sk=self.conn.password,
@@ -125,13 +126,13 @@ class HuaweiBaseHook(BaseHook):
             url=url,
             body=body
         )
-        
+
     def get_request(self, url: str):
         return self.send_request("GET", url)
 
     def post_request(self, url: str, body: dict = {}):
         return self.send_request("POST", url, body)
-    
+
     def put_request(self, url: str, body: dict = {}):
         return self.send_request("PUT", url, body)
 

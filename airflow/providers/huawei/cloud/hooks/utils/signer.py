@@ -11,12 +11,11 @@ import requests
 if sys.version_info.major < 3:
     from urllib import quote, unquote
 
-
     def hmacsha256(keyByte, message):
         return hmac.new(keyByte, message, digestmod=hashlib.sha256).digest()
 
-
     # Create a "String to Sign".
+
     def StringToSign(canonicalRequest, t):
         bytes = HexEncodeSHA256Hash(canonicalRequest)
         return "%s\n%s\n%s" % (Algorithm, datetime.strftime(t, BasicDateFormat), bytes)
@@ -24,12 +23,11 @@ if sys.version_info.major < 3:
 else:
     from urllib.parse import quote, unquote
 
-
     def hmacsha256(keyByte, message):
         return hmac.new(keyByte.encode('utf-8'), message.encode('utf-8'), digestmod=hashlib.sha256).digest()
 
-
     # Create a "String to Sign".
+
     def StringToSign(canonicalRequest, t):
         bytes = HexEncodeSHA256Hash(canonicalRequest.encode('utf-8'))
         return "%s\n%s\n%s" % (Algorithm, datetime.strftime(t, BasicDateFormat), bytes)
@@ -242,14 +240,21 @@ class Signer:
         if queryString != "":
             r.uri = r.uri + "?" + queryString
 
+
 def send_signed_request(ak: str, sk: str, region: str, project_id: str, method: str, url: str, body: dict = {}):
     sig = Signer()
     sig.Key = ak
     sig.Secret = sk
-    r = HttpRequest(method, url.replace("$PROJECT_ID",project_id).replace("$REGION",region))
+    r = HttpRequest(method, url.replace(
+        "$PROJECT_ID", project_id).replace("$REGION", region))
     r.body = "" if len(body.keys()) == 0 else json.dumps(body)
-    r.headers = {"X-Project-Id": project_id}
+    r.headers = {
+        "X-Project-Id": project_id,
+        "Content-Type": "application/json"
+    }
     sig.Sign(r)
-    return requests.request(r.method, r.scheme + "://" + r.host + r.uri, headers=r.headers, data=r.body)
-
-    
+    response = requests.request(
+        r.method, r.scheme + "://" + r.host + r.uri, headers=r.headers, data=r.body)
+    if response.status_code > 299:
+        raise Exception(f"Error: {response.status_code} {response.text}")
+    return response

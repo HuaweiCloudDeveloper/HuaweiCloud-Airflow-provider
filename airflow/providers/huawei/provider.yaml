@@ -80,6 +80,13 @@ integrations:
       - /docs/apache-airflow-providers-huawei/operators/obs.rst
     tags: [huawei]
 
+  - integration-name: Huawei Cloud ModelArts
+    external-doc-url: https://support.huaweicloud.com/intl/en-us/function-modelarts/index.html
+    logo: /integration-logos/huawei/ModelArts.png
+    how-to-guide:
+      - /docs/apache-airflow-providers-huawei/modelarts.rst
+    tags: [huawei]
+
 operators:
   - integration-name: Huawei Cloud OBS
     python-modules:
@@ -99,6 +106,9 @@ operators:
   - integration-name: Huawei Cloud DataArts
     python-modules:
       - airflow.providers.huawei.cloud.operators.dataarts
+  - integration-name: Huawei Cloud ModelArts
+    python-modules:
+      - airflow.providers.huawei.cloud.operators.modelarts
 
 sensors:
   - integration-name: Huawei Cloud OBS
@@ -139,6 +149,9 @@ hooks:
   - integration-name: Huawei Cloud DataArts
     python-modules:
       - airflow.providers.huawei.cloud.hooks.dataarts
+  - integration-name: Huawei Cloud ModelArts
+    python-modules:
+      - airflow.providers.huawei.cloud.hooks.modelarts
 
 connection-types:
   - hook-class-name: airflow.providers.huawei.cloud.hooks.base_huawei_cloud.HuaweiBaseHook
