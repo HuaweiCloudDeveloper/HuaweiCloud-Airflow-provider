@@ -157,6 +157,8 @@ class ModelArtsCreateDatasetVersionOperator(BaseOperator):
 
     """
 
+    template_fields = ("dataset_id",)
+
     def __init__(
         self,
         dataset_id: str,
@@ -225,6 +227,8 @@ class ModelArtsUpdateDatasetOperator(BaseOperator):
     :param huaweicloud_conn_id: The Airflow connection used for ModelArts credentials.
     """
 
+    template_fields: Sequence[str] = ("dataset_id",)
+
     def __init__(
         self,
         dataset_id: str,
@@ -279,6 +283,8 @@ class ModelArtsDeleteDatasetVersionOperator(BaseOperator):
     :param huaweicloud_conn_id: The Airflow connection used for ModelArts credentials.
     """
 
+    template_fields: Sequence[str] = ("dataset_id", "version_id")
+
     def __init__(
         self,
         dataset_id: str,
@@ -316,6 +322,8 @@ class ModelArtsDeleteDatasetOperator(BaseOperator):
     :param region: Regions where the API is available.
     :param huaweicloud_conn_id: The Airflow connection used for ModelArts credentials.
     """
+
+    template_fields: Sequence[str] = ("dataset_id",)
 
     def __init__(
         self,
@@ -401,6 +409,8 @@ class ModelArtsDeleteAlgorithmOperator(BaseOperator):
     :param huaweicloud_conn_id: The Airflow connection used for ModelArts credentials.
     """
 
+    template_fields: Sequence[str] = ("algorithm_id",)
+
     def __init__(
         self,
         algorithm_id: str,
@@ -438,6 +448,8 @@ class ModelArtsChangeAlgorithmOperator(BaseOperator):
     :param region: Regions where the API is available.
     :param huaweicloud_conn_id: The Airflow connection used for ModelArts credentials.
     """
+
+    template_fields: Sequence[str] = ("algorithm_id",)
 
     def __init__(
         self,
@@ -499,6 +511,9 @@ class ModelArtsCreateTrainingJobOperator(BaseOperator):
     :param huaweicloud_conn_id: The Airflow connection used for ModelArts credentials.
     """
 
+    template_fields = ("algorithm")
+    template_fields_renderers = {"algorithm": "json"}
+
     def __init__(
         self,
         kind: str,
@@ -547,6 +562,8 @@ class ModelArtsDeleteTrainingJobOperator(BaseOperator):
     :param huaweicloud_conn_id: The Airflow connection used for ModelArts credentials.
     """
 
+    template_fields: Sequence[str] = ("training_job_id",)
+
     def __init__(
         self,
         training_job_id: str,
@@ -580,6 +597,8 @@ class ModelArtsStopTrainingJobOperator(BaseOperator):
     :param region: Regions where the API is available.
     :param huaweicloud_conn_id: The Airflow connection used for ModelArts credentials.
     """
+
+    template_fields: Sequence[str] = ("training_job_id",)
 
     def __init__(
         self,
@@ -648,6 +667,8 @@ class ModelArtsCreateServiceOperator(BaseOperator):
     :param region: Regions where the API is available.
     :param huaweicloud_conn_id: The Airflow connection used for ModelArts credentials.
     """
+
+    template_fields: Sequence[str] = ("cluster_id",)
 
     def __init__(
         self,
@@ -718,6 +739,8 @@ class ModelArtsDeleteServiceOperator(BaseOperator):
     :param huaweicloud_conn_id: The Airflow connection used for ModelArts credentials.
     """
 
+    template_fields: Sequence[str] = ("service_id",)
+
     def __init__(
         self,
         service_id: str,
@@ -759,6 +782,8 @@ class ModelArtsUpdateServiceOperator(BaseOperator):
     :param region: Regions where the API is available.
     :param huaweicloud_conn_id: The Airflow connection used for ModelArts credentials.
     """
+
+    template_fields: Sequence[str] = ("service_id",)
 
     def __init__(
         self,
@@ -950,6 +975,8 @@ class ModelArtsDeleteModelOperator(BaseOperator):
     :param region: Regions where the API is available.
     :param huaweicloud_conn_id: The Airflow connection used for ModelArts credentials.
     """
+
+    template_fields: Sequence[str] = ("model_id",)
 
     def __init__(
         self,
