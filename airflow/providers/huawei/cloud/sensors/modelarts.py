@@ -17,7 +17,7 @@
 # under the License.
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, Sequence
 
 if TYPE_CHECKING:
     from airflow.utils.context import Context
@@ -29,6 +29,8 @@ from airflow.sensors.base import BaseSensorOperator
 
 
 class ModelArtsDatasetSensor(BaseSensorOperator):
+
+    template_fields: Sequence[str] = ("dataset_id",)
 
     SUCCESS_STATES = (1,)
 
@@ -69,6 +71,8 @@ class ModelArtsDatasetSensor(BaseSensorOperator):
 
 
 class ModelArtsCreateDatasetVersionSensor(BaseSensorOperator):
+
+    template_fields: Sequence[str] = ("dataset_id", "version_id")
 
     SUCCESS_STATES = (1,)
     FAILURE_STATES = (4,)
@@ -115,6 +119,8 @@ class ModelArtsCreateDatasetVersionSensor(BaseSensorOperator):
 
 
 class ModelArtsCreateTrainingJobSensor(BaseSensorOperator):
+
+    template_fields: Sequence[str] = ("training_job_id",)
     # Creating Pending Running Failed Completed, Terminating Terminated Abnormal
     SUCCESS_STATES = ("Completed",)
     FAILURE_STATES = ("Abnormal","Failed")
