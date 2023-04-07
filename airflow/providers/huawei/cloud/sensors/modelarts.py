@@ -70,7 +70,7 @@ class ModelArtsDatasetSensor(BaseSensorOperator):
         )
 
 
-class ModelArtsCreateDatasetVersionSensor(BaseSensorOperator):
+class ModelArtsDatasetVersionSensor(BaseSensorOperator):
 
     template_fields: Sequence[str] = ("dataset_id", "version_id")
 
@@ -118,12 +118,12 @@ class ModelArtsCreateDatasetVersionSensor(BaseSensorOperator):
         )
 
 
-class ModelArtsCreateTrainingJobSensor(BaseSensorOperator):
+class ModelArtsTrainingJobSensor(BaseSensorOperator):
 
     template_fields: Sequence[str] = ("training_job_id",)
     # Creating Pending Running Failed Completed, Terminating Terminated Abnormal
     SUCCESS_STATES = ("Completed",)
-    FAILURE_STATES = ("Abnormal","Failed")
+    FAILURE_STATES = ("Abnormal", "Failed")
 
     def __init__(
         self,
@@ -160,3 +160,44 @@ class ModelArtsCreateTrainingJobSensor(BaseSensorOperator):
         )
 
 
+class ModelArtsServiceJobSensor(BaseSensorOperator):
+
+    template_fields: Sequence[str] = ("service_id",)
+    # Creating Pending Running Failed Completed, Terminating Terminated Abnormal
+    # running deploying concerning failed stopped finished
+    SUCCESS_STATES = ("finished","stopped",)
+    FAILURE_STATES = ("failed",)
+
+    def __init__(
+        self,
+        service_id: str,
+        project_id: str | None = None,
+        region: str | None = None,
+        huaweicloud_conn_id: str = "huaweicloud_default",
+        **kwargs: Any,
+    ) -> None:
+        super().__init__(**kwargs)
+        self.service_id = service_id
+        self.huaweicloud_conn_id = huaweicloud_conn_id
+        self.project_id = project_id
+        self.region = region
+
+    def poke(self, context: Context) -> bool:
+
+        service_status = self.get_hook.show_service(
+            self.service_id)["status"]
+
+        if service_status in self.FAILURE_STATES:
+            raise AirflowException(
+                f"Service {self.service_id} failed to create.")
+        if service_status in self.SUCCESS_STATES:
+            return True
+
+        return False
+
+    @cached_property
+    def get_hook(self) -> ModelArtsHook:
+        """Create and return a ModelArtsHook"""
+        return ModelArtsHook(
+            huaweicloud_conn_id=self.huaweicloud_conn_id, project_id=self.project_id, region=self.region
+        )
