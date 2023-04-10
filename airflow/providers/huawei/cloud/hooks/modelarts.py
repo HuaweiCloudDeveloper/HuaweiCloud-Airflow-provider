@@ -209,8 +209,9 @@ class ModelArtsHook(HuaweiBaseHook):
         training_job_id: str
     ):
         try:
-            return self.delete_request(
+            self.delete_request(
                 url=f"https://modelarts.$REGION.myhuaweicloud.com/v2/$PROJECT_ID/training-jobs/{training_job_id}")
+            return {}
         except Exception as e:
             raise AirflowException(f"Errors when deleting training job {e}")
 
@@ -268,8 +269,9 @@ class ModelArtsHook(HuaweiBaseHook):
         service_id: str
     ):
         try:
-            return self.delete_request(
+            self.delete_request(
                 url=f"https://modelarts.$REGION.myhuaweicloud.com/v1/$PROJECT_ID/services/{service_id}")
+            return {}
         except Exception as e:
             raise AirflowException(f"Errors when deleting service {e}")
 
@@ -355,8 +357,9 @@ class ModelArtsHook(HuaweiBaseHook):
         model_id: str
     ):
         try:
-            return self.delete_request(
+            self.delete_request(
                 url=f"https://modelarts.$REGION.myhuaweicloud.com/v1/$PROJECT_ID/models/{model_id}")
+            return {}
         except Exception as e:
             raise AirflowException(f"Errors when deleting model {e}")
 
