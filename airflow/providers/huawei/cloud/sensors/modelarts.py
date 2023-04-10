@@ -201,3 +201,42 @@ class ModelArtsServiceJobSensor(BaseSensorOperator):
         return ModelArtsHook(
             huaweicloud_conn_id=self.huaweicloud_conn_id, project_id=self.project_id, region=self.region
         )
+
+class ModelArtsModelSensor(BaseSensorOperator):
+
+    template_fields: Sequence[str] = ("model_id",)
+    SUCCESS_STATES = ("published",)
+    FAILURE_STATES = () #TODO:
+
+    def __init__(
+        self,
+        model_id: str,
+        project_id: str | None = None,
+        region: str | None = None,
+        huaweicloud_conn_id: str = "huaweicloud_default",
+        **kwargs: Any,
+    ) -> None:
+        super().__init__(**kwargs)
+        self.model_id = model_id
+        self.huaweicloud_conn_id = huaweicloud_conn_id
+        self.project_id = project_id
+        self.region = region
+
+    def poke(self, context: Context) -> bool:
+
+        model_status = self.get_hook.show_model(self.model_id)["model_status"]
+
+        if model_status in self.FAILURE_STATES:
+            raise AirflowException(
+                f"Model {self.model_id} failed to create.")
+        if model_status in self.SUCCESS_STATES:
+            return True
+
+        return False
+
+    @cached_property
+    def get_hook(self) -> ModelArtsHook:
+        """Create and return a ModelArtsHook"""
+        return ModelArtsHook(
+            huaweicloud_conn_id=self.huaweicloud_conn_id, project_id=self.project_id, region=self.region
+        )

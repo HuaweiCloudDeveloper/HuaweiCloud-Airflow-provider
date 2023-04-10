@@ -390,3 +390,10 @@ class ModelArtsHook(HuaweiBaseHook):
                 url=f"https://modelarts.$REGION.myhuaweicloud.com/v1/$PROJECT_ID/services/{service_id}").json()
         except Exception as e:
             raise AirflowException(f"Errors when showing service {e}")
+
+    def show_model(self, model_id: str):
+        try:
+            return self.get_request(
+                url=f"https://modelarts.$REGION.myhuaweicloud.com/v1/$PROJECT_ID/models/{model_id}").json()
+        except Exception as e:
+            raise AirflowException(f"Errors when showing model {e}")
