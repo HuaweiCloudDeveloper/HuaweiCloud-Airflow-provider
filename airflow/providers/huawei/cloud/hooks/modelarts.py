@@ -31,9 +31,9 @@ class ModelArtsHook(HuaweiBaseHook):
         data_sources: list[dict],
         work_path: str,
         work_path_type: int,
+        dataset_type: int,
         data_format: str | None = None,
         dataset_name: str | None = None,
-        dataset_type: int | None = None,
         description: str | None = None,
         import_annotations: bool | None = None,
         import_data: bool | None = None,
@@ -218,7 +218,7 @@ class ModelArtsHook(HuaweiBaseHook):
     def stop_training_job(
         self,
         training_job_id: str,
-        action_type: str | None = None
+        action_type: str
     ):
         try:
             return self.post_request(

@@ -95,7 +95,7 @@ class ModelArtsDatasetVersionSensor(BaseSensorOperator):
 
     def poke(self, context: Context) -> bool:
 
-        versions = self.get_hook.list_dataset_version(self.dataset_id)[
+        versions = self.get_hook.list_dataset_version(dataset_id=self.dataset_id)[
             "versions"]
 
         for version in versions:
@@ -122,7 +122,7 @@ class ModelArtsTrainingJobSensor(BaseSensorOperator):
 
     template_fields: Sequence[str] = ("training_job_id",)
     # Creating Pending Running Failed Completed, Terminating Terminated Abnormal
-    SUCCESS_STATES = ("Completed",)
+    SUCCESS_STATES = ("Completed","Terminated")
     FAILURE_STATES = ("Abnormal", "Failed")
 
     def __init__(
@@ -142,7 +142,7 @@ class ModelArtsTrainingJobSensor(BaseSensorOperator):
     def poke(self, context: Context) -> bool:
 
         job_status = self.get_hook.list_training_job(
-            self.training_job_id)["status"]["phase"]
+            training_job_id=self.training_job_id)["status"]["phase"]
 
         if job_status in self.FAILURE_STATES:
             raise AirflowException(
@@ -165,8 +165,8 @@ class ModelArtsServiceJobSensor(BaseSensorOperator):
     template_fields: Sequence[str] = ("service_id",)
     # Creating Pending Running Failed Completed, Terminating Terminated Abnormal
     # running deploying concerning failed stopped finished
-    SUCCESS_STATES = ("finished","stopped",)
-    FAILURE_STATES = ("failed",)
+    SUCCESS_STATES = ("running" ,"finished","stopped",)
+    FAILURE_STATES = ("failed", "concerning")
 
     def __init__(
         self,
@@ -185,7 +185,7 @@ class ModelArtsServiceJobSensor(BaseSensorOperator):
     def poke(self, context: Context) -> bool:
 
         service_status = self.get_hook.show_service(
-            self.service_id)["status"]
+            service_id=self.service_id)["status"]
 
         if service_status in self.FAILURE_STATES:
             raise AirflowException(
@@ -224,7 +224,7 @@ class ModelArtsModelSensor(BaseSensorOperator):
 
     def poke(self, context: Context) -> bool:
 
-        model_status = self.get_hook.show_model(self.model_id)["model_status"]
+        model_status = self.get_hook.show_model(model_id=self.model_id)["model_status"]
 
         if model_status in self.FAILURE_STATES:
             raise AirflowException(

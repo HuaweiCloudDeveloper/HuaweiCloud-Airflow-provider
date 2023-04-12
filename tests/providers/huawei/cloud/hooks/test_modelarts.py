@@ -344,4 +344,12 @@ class TestModelArtsHook(unittest.TestCase):
         )
         show_service.assert_called_once
 
+    @mock.patch(MODELARTS_STRING.format("ModelArtsHook.show_model"))
+    def test_show_model(self, show_model):
+        model_id= "model_id"
+        self.hook.show_model(
+            model_id
+        )
+        show_model.assert_called_once
+
 

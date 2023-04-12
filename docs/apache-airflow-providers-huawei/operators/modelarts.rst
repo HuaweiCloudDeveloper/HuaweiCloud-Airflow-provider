@@ -39,7 +39,6 @@ ModelArts is a one-stop AI platform that enables developers and data scientists 
  - :class:`~airflow.providers.huawei.cloud.operators.modelarts.ModelArtsStopTrainingJobOperator`
  - :class:`~airflow.providers.huawei.cloud.operators.modelarts.ModelArtsDeleteModelOperator`
 
-
 Operators
 ---------
 

@@ -88,8 +88,8 @@ class ModelArtsCreateDatasetOperator(BaseOperator):
         work_path: str,
         work_path_type: int,
         dataset_name: str,
+        dataset_type: int,
         data_format: str | None = None,
-        dataset_type: int | None = None,
         description: str | None = None,
         import_annotations: bool | None = None,
         import_data: bool | None = None,
@@ -603,7 +603,7 @@ class ModelArtsStopTrainingJobOperator(BaseOperator):
     def __init__(
         self,
         training_job_id: str,
-        action_type: str | None = None,
+        action_type: str,
         project_id: str | None = None,
         region: str | None = None,
         huaweicloud_conn_id: str = "huaweicloud_default",
@@ -843,35 +843,35 @@ class ModelArtsCreateModelOperator(BaseOperator):
     input this parameter for source tracing. If the model is imported from a third-party meta model,
     leave this parameter blank. This parameter is left blank by default. Non-template parameter
     :param source_copy: Whether to enable image replication. This parameter is valid only when model_type is set to Image. Options:
-        true: Default value, indicating that image replication is enabled. After this function is enabled,
-        AI applications cannot be rapidly created, and modifying or deleting an image in the SWR source directory will not affect service deployment.
-        false: Image replication is not enabled. After this function is disabled, AI applications can be rapidly created,
-        but modifying or deleting an image in the SWR source directory will affect service deployment.
+    true: Default value, indicating that image replication is enabled. After this function is enabled,
+    AI applications cannot be rapidly created, and modifying or deleting an image in the SWR source directory will not affect service deployment.
+    false: Image replication is not enabled. After this function is disabled, AI applications can be rapidly created,
+    but modifying or deleting an image in the SWR source directory will affect service deployment.
     :param initial_config: Character string converted from the model configuration file. Obtain fields such as apis,
-        dependencies, input_params, and output_params in the initial_config configuration file. Non-template parameter
+    dependencies, input_params, and output_params in the initial_config configuration file. Non-template parameter
     :param execution_code: OBS path for storing the execution code. By default, this parameter is left blank.
-        The name of the execution code file is consistently to be customize_service.py. The inference code file must be stored
-        in the model directory. This parameter can be left blank.
-        Then, the system will automatically identify the inference code in the model directory. Common parameter
+    The name of the execution code file is consistently to be customize_service.py. The inference code file must be stored
+    in the model directory. This parameter can be left blank.
+    Then, the system will automatically identify the inference code in the model directory. Common parameter
     :param source_job_id: ID of the source training job. If the model is generated from a training job,
-        input this parameter for source tracing. If the model is imported from a third-party meta model, leave this parameter blank.
-        This parameter is left blank by default. Non-template parameter
+    input this parameter for source tracing. If the model is imported from a third-party meta model, leave this parameter blank.
+    This parameter is left blank by default. Non-template parameter
     :param output_params: Collection of output parameters of a model. By default, this parameter is left blank.
-        If the parameters are read from apis in the configuration file, provide only the initial_config field, and this field can be left blank. Non-template parameter
+    If the parameters are read from apis in the configuration file, provide only the initial_config field, and this field can be left blank. Non-template parameter
     :param description: Model description that consists of 1 to 100 characters. The following special characters cannot be contained: &!'"<>= Common parameter
     :param runtime: Model runtime environment. Its possible values are determined based on model_type.
     :param model_metrics: Model precision. If the value is read from the configuration file, this parameter can be left blank. Non-template parameter.
     :param source_type: Model source type, which can only be auto, indicating an ExeML model (model download is not allowed).
-        If the model is obtained from a training job, leave this parameter blank. This parameter is left blank by default. Non-template parameter
+    If the model is obtained from a training job, leave this parameter blank. This parameter is left blank by default. Non-template parameter
     :param dependencies: Package required for inference code and model. By default, this parameter is left blank. If the package is read from the configuration file, this parameter can be left blank. Non-template parameter.
     :param workspace_id: Workspace ID, which defaults to 0. Common parameter.
     :param model_algorithm: Model algorithm. If the algorithm is read from the configuration file, this parameter can be left blank.
-        The value can be predict_analysis, object_detection, or image_classification. Non-template parameter.
+    The value can be predict_analysis, object_detection, or image_classification. Non-template parameter.
     :param apis: All API input and output parameters of the model. If the parameters are parsed from the configuration file,
-        this parameter can be left blank. Non-template parameter.
+    this parameter can be left blank. Non-template parameter.
     :param install_type: Deployment type. Only lowercase letters are supported. The value can be real-time, edge, or batch. Default value: [real-time, edge, batch].
     :param input_params: Collection of input parameters of a model. By default, this parameter is left blank.
-        If the parameters are read from apis in the configuration file, provide only the initial_config field, and this field can be left blank. Non-template parameter.
+    If the parameters are read from apis in the configuration file, provide only the initial_config field, and this field can be left blank. Non-template parameter.
     :param project_id: Specifies the project ID.
     :param region: Regions where the API is available.
     :param huaweicloud_conn_id: The Airflow connection used for ModelArts credentials.
