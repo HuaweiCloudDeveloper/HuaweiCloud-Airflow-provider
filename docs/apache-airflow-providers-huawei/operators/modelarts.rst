@@ -38,6 +38,8 @@ ModelArts is a one-stop AI platform that enables developers and data scientists 
  - :class:`~airflow.providers.huawei.cloud.operators.modelarts.ModelArtsDeleteTrainingJobOperator`
  - :class:`~airflow.providers.huawei.cloud.operators.modelarts.ModelArtsStopTrainingJobOperator`
  - :class:`~airflow.providers.huawei.cloud.operators.modelarts.ModelArtsDeleteModelOperator`
+ - :class:`~airflow.providers.huawei.cloud.operators.modelarts.ModelArtsCreateDatasetVersionOperator`
+ - :class:`~airflow.providers.huawei.cloud.operators.modelarts.ModelArtsDeleteDatasetOperator`
  - :class:`~airflow.providers.huawei.cloud.sensors.modelarts.ModelArtsDatasetSensor`
  - :class:`~airflow.providers.huawei.cloud.sensors.modelarts.ModelArtsDatasetVersionSensor`
  - :class:`~airflow.providers.huawei.cloud.sensors.modelarts.ModelArtsTrainingJobSensor`
@@ -59,6 +61,17 @@ To to create a dataset you can use
    :start-after: [START howto_operator_modelarts_create_dataset]
    :end-before: [END howto_operator_modelarts_create_dataset]
 
+Delete a dataset
+================
+
+To delete a dataset you can use
+:class:`~airflow.providers.huawei.cloud.operators.modelarts.ModelArtsDeleteDatasetOperator`.
+
+.. exampleinclude:: /../../tests/system/providers/huawei/example_modelarts.py
+   :dedent: 4
+   :language: python
+   :start-after: [START howto_operator_modelarts_delete_dataset]
+   :end-before: [END howto_operator_modelarts_delete_dataset]
 
 Update a dataset
 ================
@@ -71,6 +84,18 @@ To modify basic information about a dataset such as the dataset name, descriptio
    :language: python
    :start-after: [START howto_operator_modelarts_update_dataset]
    :end-before: [END howto_operator_modelarts_update_dataset]
+
+Create dataset version
+======================
+
+To create a dataset version you can use
+:class:`~airflow.providers.huawei.cloud.operators.modelarts.ModelArtsCreateDatasetVersionOperator`.
+
+.. exampleinclude:: /../../tests/system/providers/huawei/example_modelarts.py
+   :dedent: 4
+   :language: python
+   :start-after: [START howto_operator_modelarts_create_dataset_version]
+   :end-before: [END howto_operator_modelarts_create_dataset_version]
 
 Delete a dataset version
 ========================

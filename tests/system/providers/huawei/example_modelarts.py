@@ -33,7 +33,9 @@ from airflow.providers.huawei.cloud.operators.modelarts import (
     ModelArtsDeleteTrainingJobOperator,
     ModelArtsStopTrainingJobOperator,
     ModelArtsUpdateDatasetOperator,
-    ModelArtsUpdateServiceOperator
+    ModelArtsUpdateServiceOperator,
+    ModelArtsCreateDatasetVersionOperator,
+    ModelArtsDeleteDatasetOperator
 )
 
 from airflow.providers.huawei.cloud.sensors.modelarts import (
@@ -363,6 +365,20 @@ with DAG(
         model_id="model_id"
     )
     # [END howto_sensor_modelarts_model_status]
+
+    # [START howto_operator_modelarts_create_dataset_version]
+    create_dataset_version = ModelArtsCreateDatasetVersionOperator(
+        task_id="create_dataset_version",
+        dataset_id="dataset_id"
+    )
+    # [END howto_operator_modelarts_create_dataset_version]
+
+    # [START howto_operator_modelarts_delete_dataset]
+    delete_dataset = ModelArtsDeleteDatasetOperator(
+        task_id="delete_dataset",
+        dataset_id="dataset_id"
+    )
+    # [END howto_operator_modelarts_delete_dataset]
 
 
 from tests.system.utils import get_test_run  # noqa: E402
