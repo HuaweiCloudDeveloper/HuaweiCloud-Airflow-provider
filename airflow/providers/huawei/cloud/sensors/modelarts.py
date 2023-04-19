@@ -29,6 +29,14 @@ from airflow.sensors.base import BaseSensorOperator
 
 
 class ModelArtsDatasetSensor(BaseSensorOperator):
+    """
+    Waits for a dataset to reach a specific status.
+
+    :param dataset_id: The ID of the dataset.
+    :param project_id: The ID of the project.
+    :param workspace: The name of the workspace.
+    :param huaweicloud_conn_id: The connection ID to use when fetching connection info.
+    """
 
     template_fields: Sequence[str] = ("dataset_id",)
 
@@ -71,6 +79,15 @@ class ModelArtsDatasetSensor(BaseSensorOperator):
 
 
 class ModelArtsDatasetVersionSensor(BaseSensorOperator):
+    """
+    Waits for a dataset version to reach a specific status.
+
+    :param dataset_id: The ID of the dataset.
+    :param version_id: The ID of the dataset version.
+    :param project_id: The ID of the project.
+    :param workspace: The name of the workspace.
+    :param huaweicloud_conn_id: The connection ID to use when fetching connection info.
+    """
 
     template_fields: Sequence[str] = ("dataset_id", "version_id")
 
@@ -119,9 +136,17 @@ class ModelArtsDatasetVersionSensor(BaseSensorOperator):
 
 
 class ModelArtsTrainingJobSensor(BaseSensorOperator):
+    """
+    Waits for a training job to reach a specific status.
+
+    :param training_job_id: The ID of the training job.
+    :param project_id: The ID of the project.
+    :param workspace: The name of the workspace.
+    :param huaweicloud_conn_id: The connection ID to use when fetching connection info.
+    """
 
     template_fields: Sequence[str] = ("training_job_id",)
-    # Creating Pending Running Failed Completed, Terminating Terminated Abnormal
+
     SUCCESS_STATES = ("Completed","Terminated")
     FAILURE_STATES = ("Abnormal", "Failed")
 
@@ -161,10 +186,17 @@ class ModelArtsTrainingJobSensor(BaseSensorOperator):
 
 
 class ModelArtsServiceJobSensor(BaseSensorOperator):
+    """
+    Waits for a service job to reach a specific status.
+
+    :param service_id: The ID of the service.
+    :param project_id: The ID of the project.
+    :param workspace: The name of the workspace.
+    :param huaweicloud_conn_id: The connection ID to use when fetching connection info.
+    """
 
     template_fields: Sequence[str] = ("service_id",)
-    # Creating Pending Running Failed Completed, Terminating Terminated Abnormal
-    # running deploying concerning failed stopped finished
+
     SUCCESS_STATES = ("running" ,"finished","stopped",)
     FAILURE_STATES = ("failed", "concerning")
 
@@ -203,6 +235,14 @@ class ModelArtsServiceJobSensor(BaseSensorOperator):
         )
 
 class ModelArtsModelSensor(BaseSensorOperator):
+    """
+    Waits for a model to reach a specific status.
+
+    :param model_id: The ID of the model.
+    :param project_id: The ID of the project.
+    :param workspace: The name of the workspace.
+    :param huaweicloud_conn_id: The connection ID to use when fetching connection info.
+    """
 
     template_fields: Sequence[str] = ("model_id",)
     SUCCESS_STATES = ("published",)

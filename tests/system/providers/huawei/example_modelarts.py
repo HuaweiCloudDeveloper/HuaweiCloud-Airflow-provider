@@ -36,6 +36,14 @@ from airflow.providers.huawei.cloud.operators.modelarts import (
     ModelArtsUpdateServiceOperator
 )
 
+from airflow.providers.huawei.cloud.sensors.modelarts import (
+    ModelArtsDatasetSensor,
+    ModelArtsDatasetVersionSensor,
+    ModelArtsTrainingJobSensor,
+    ModelArtsServiceJobSensor,
+    ModelArtsModelSensor
+)
+
 project_id = "ea31ff23328a4d6bbcca820076f7c606"
 job_name = "job_name"
 workspace = "workspace-id"
@@ -319,6 +327,42 @@ with DAG(
         description="description",
     )
     # [END howto_operator_modelarts_update_service]
+
+    # [START howto_sensor_modelarts_dataset_status]
+    dataset_sensor = ModelArtsDatasetSensor (
+        task_id="dataset_sensor",
+        dataset_id="dataset_id"
+    )
+    # [END howto_sensor_modelarts_dataset_status]
+
+    # [START howto_sensor_modelarts_dataset_version_status]
+    dataset_version_sensor = ModelArtsDatasetVersionSensor (
+        task_id="dataset_version_sensor",
+        dataset_id="dataset_id",
+        version_id="version_id"
+    )
+    # [END howto_sensor_modelarts_dataset_version_status]
+
+    # [START howto_sensor_modelarts_training_job_status]
+    training_job_sensor = ModelArtsTrainingJobSensor(
+        task_id="training_job_sensor",
+        training_job_id="training_job_id"
+    )
+    # [END howto_sensor_modelarts_training_job_status]
+
+    # [START howto_sensor_modelarts_service_job_status]
+    service_job_sensor = ModelArtsServiceJobSensor(
+        task_id="service_job_sensor",
+        service_id="service_id"
+    )
+    # [END howto_sensor_modelarts_service_job_status]
+
+    # [START howto_sensor_modelarts_model_status]
+    model_sensor = ModelArtsModelSensor(
+        task_id="model_sensor",
+        model_id="model_id"
+    )
+    # [END howto_sensor_modelarts_model_status]
 
 
 from tests.system.utils import get_test_run  # noqa: E402

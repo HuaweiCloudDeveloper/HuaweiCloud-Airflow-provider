@@ -38,6 +38,11 @@ ModelArts is a one-stop AI platform that enables developers and data scientists 
  - :class:`~airflow.providers.huawei.cloud.operators.modelarts.ModelArtsDeleteTrainingJobOperator`
  - :class:`~airflow.providers.huawei.cloud.operators.modelarts.ModelArtsStopTrainingJobOperator`
  - :class:`~airflow.providers.huawei.cloud.operators.modelarts.ModelArtsDeleteModelOperator`
+ - :class:`~airflow.providers.huawei.cloud.sensors.modelarts.ModelArtsDatasetSensor`
+ - :class:`~airflow.providers.huawei.cloud.sensors.modelarts.ModelArtsDatasetVersionSensor`
+ - :class:`~airflow.providers.huawei.cloud.sensors.modelarts.ModelArtsTrainingJobSensor`
+ - :class:`~airflow.providers.huawei.cloud.sensors.modelarts.ModelArtsServiceJobSensor`
+ - :class:`~airflow.providers.huawei.cloud.sensors.modelarts.ModelArtsModelSensor`
 
 Operators
 ---------
@@ -211,3 +216,66 @@ To stop a training job you can use
    :language: python
    :start-after: [START howto_operator_modelarts_stop_training_job]
    :end-before: [END howto_operator_modelarts_stop_training_job]
+
+Sensors
+-------
+
+Dataset Sensor
+==============
+
+Use the :class:`~airflow.providers.huawei.cloud.sensors.modelarts.ModelArtsDatasetSensor`
+Wait to query the status of a dataset.
+
+.. exampleinclude:: /../../tests/system/providers/huawei/example_modelarts.py
+    :language: python
+    :start-after: [START howto_sensor_modelarts_dataset_status]
+    :dedent: 4
+    :end-before: [END howto_sensor_modelarts_dataset_status]
+
+Dataset Version Sensor
+======================
+
+Use the :class:`~airflow.providers.huawei.cloud.sensors.modelarts.ModelArtsDatasetVersionSensor`
+Wait to query the status of a dataset version.
+
+.. exampleinclude:: /../../tests/system/providers/huawei/example_modelarts.py
+    :language: python
+    :start-after: [START howto_sensor_modelarts_dataset_version_status]
+    :dedent: 4
+    :end-before: [END howto_sensor_modelarts_dataset_version_status]
+
+Training Job Sensor
+===================
+
+Use the :class:`~airflow.providers.huawei.cloud.sensors.modelarts.ModelArtsTrainingJobSensor`
+Wait to query the status of a training job.
+
+.. exampleinclude:: /../../tests/system/providers/huawei/example_modelarts.py
+    :language: python
+    :start-after: [START howto_sensor_modelarts_training_job_status]
+    :dedent: 4
+    :end-before: [END howto_sensor_modelarts_training_job_status]
+
+Service Job Sensor
+==================
+
+Use the :class:`~airflow.providers.huawei.cloud.sensors.modelarts.ModelArtsServiceJobSensor`
+Wait to query the status of a service job.
+
+.. exampleinclude:: /../../tests/system/providers/huawei/example_modelarts.py
+    :language: python
+    :start-after: [START howto_sensor_modelarts_service_job_status]
+    :dedent: 4
+    :end-before: [END howto_sensor_modelarts_service_job_status]
+
+Model Sensor
+============
+
+Use the :class:`~airflow.providers.huawei.cloud.sensors.modelarts.ModelArtsModelSensor`
+Wait to query the status of a model.
+
+.. exampleinclude:: /../../tests/system/providers/huawei/example_modelarts.py
+    :language: python
+    :start-after: [START howto_sensor_modelarts_model_status]
+    :dedent: 4
+    :end-before: [END howto_sensor_modelarts_model_status]
