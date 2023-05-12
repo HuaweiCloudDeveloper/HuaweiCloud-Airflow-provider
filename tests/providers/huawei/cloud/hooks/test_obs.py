@@ -125,6 +125,9 @@ class TestOBSHook(unittest.TestCase):
         mock_create_bucket = mock_bucket_client.return_value.createBucket
         mock_create_bucket.return_value = RESP_200
 
+        mock_head_bucket = mock_bucket_client.return_value.headBucket
+        mock_head_bucket.return_value = RESP_404
+
         self.hook.create_bucket(MOCK_BUCKET_NAME)
 
         mock_bucket_client.assert_called_once_with(MOCK_BUCKET_NAME)
@@ -134,6 +137,8 @@ class TestOBSHook(unittest.TestCase):
     def test_create_bucket_if_status_ge_300(self, mock_bucket_client):
         mock_create_bucket = mock_bucket_client.return_value.createBucket
         mock_create_bucket.return_value = RESP_404
+        mock_head_bucket = mock_bucket_client.return_value.headBucket
+        mock_head_bucket.return_value = RESP_404
 
         with self.assertRaises(AirflowException):
             self.hook.create_bucket(MOCK_BUCKET_NAME)
@@ -729,7 +734,7 @@ class TestOBSHook(unittest.TestCase):
         mock_delete_objects.return_value = RESP_404
 
         self.hook.delete_objects(
-            object_list=["i" for i in range(1001)],
+            object_list=["i" for _ in range(1001)],
             bucket_name=MOCK_BUCKET_NAME,
         )
 

@@ -44,14 +44,7 @@ MOCK_DOWNLOAD_PATH = "mock_download_path"
 
 class TestOBSOBSCreateObjectOperator(unittest.TestCase):
     def setUp(self):
-        self.headers = {
-            "md5": None,
-            "acl": None,
-            "encryption": None,
-            "key": None,
-            "storageClass": None,
-            "expires": None,
-        }
+        self.headers = None
 
     @mock.patch("airflow.providers.huawei.cloud.operators.huawei_obs.OBSHook")
     def test_execute_if_bucket_provided(self, mock_hook):

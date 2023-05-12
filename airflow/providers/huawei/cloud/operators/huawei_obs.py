@@ -416,6 +416,7 @@ class OBSCreateObjectOperator(BaseOperator):
             "storageClass": storage_class,
             "expires": expires,
         }
+        self.headers = self.headers if any(self.headers.values()) else None
 
     def execute(self, context: Context):
         obs_hook = OBSHook(huaweicloud_conn_id=self.huaweicloud_conn_id, region=self.region)

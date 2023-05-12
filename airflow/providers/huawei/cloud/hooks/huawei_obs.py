@@ -153,7 +153,6 @@ class OBSHook(HuaweiBaseHook):
         Gets an OBS client to manage resources on OBS services such as buckets and objects.
         Returns an OBS Client.
 
-        :param region: the endpoint of region.
         """
         auth = self.get_credential()
         access_key_id, secret_access_key = auth
@@ -177,10 +176,13 @@ class OBSHook(HuaweiBaseHook):
         Create a bucket.
 
         :param bucket_name: The name of the bucket.
-        :param region: The name of the region in which to create the bucket.
         """
+        bucket_client = self.get_bucket_client(bucket_name)
+        if bucket_client.headBucket().status < 300:
+            raise AirflowException(f"The OBS bucket named {bucket_name} already exists.")
+
         try:
-            resp = self.get_bucket_client(bucket_name).createBucket(location=self.get_region())
+            resp = bucket_client.createBucket(location=self.get_region())
             if resp.status < 300:
                 self.log.info("Created OBS bucket with name: %s.", bucket_name)
             else:
