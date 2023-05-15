@@ -336,12 +336,8 @@ class TestOBSHook(unittest.TestCase):
     @mock.patch(OBS_STRING.format("OBSHook.get_bucket_client"))
     def test_exist_object_if_provided_bucket(self, mock_bucket_client, mock_get_obs_bucket_object_key):
         mock_get_obs_bucket_object_key.return_value = (MOCK_BUCKET_NAME, MOCK_OBJECT_KEY)
-        mock_list_object = mock_bucket_client.return_value.listObjects
-
-        body = {"contents": [mock.Mock(key=MOCK_OBJECT_KEY)]}
-        resp_object_list = copy.deepcopy(RESP_200)
-        resp_object_list.body = mock.Mock(**body)
-        mock_list_object.return_value = resp_object_list
+        mock_exist_object = mock_bucket_client.return_value.headObject
+        mock_exist_object.return_value = RESP_200
 
         exist = self.hook.exist_object(MOCK_OBJECT_KEY, MOCK_BUCKET_NAME)
 
@@ -349,7 +345,7 @@ class TestOBSHook(unittest.TestCase):
             MOCK_BUCKET_NAME, MOCK_OBJECT_KEY, "bucket_name", "object_key"
         )
         mock_bucket_client.assert_called_once_with(MOCK_BUCKET_NAME)
-        mock_list_object.assert_called_once_with(prefix=MOCK_OBJECT_KEY, max_keys=1)
+        mock_exist_object.assert_called_once_with(MOCK_OBJECT_KEY)
         self.assertEqual(True, exist)
 
     @mock.patch(OBS_STRING.format("OBSHook.get_obs_bucket_object_key"))
@@ -357,18 +353,14 @@ class TestOBSHook(unittest.TestCase):
     def test_exist_object_if_not_provided_bucket(self, mock_bucket_client, mock_get_obs_bucket_object_key):
         object_key = f"obs://{MOCK_BUCKET_NAME}/{MOCK_OBJECT_KEY}"
         mock_get_obs_bucket_object_key.return_value = (MOCK_BUCKET_NAME, MOCK_OBJECT_KEY)
-        mock_list_object = mock_bucket_client.return_value.listObjects
-
-        body = {"contents": [mock.Mock(key=MOCK_OBJECT_KEY)]}
-        resp_object_list = copy.deepcopy(RESP_200)
-        resp_object_list.body = mock.Mock(**body)
-        mock_list_object.return_value = resp_object_list
+        mock_exist_object = mock_bucket_client.return_value.headObject
+        mock_exist_object.return_value = RESP_200
 
         exist = self.hook.exist_object(bucket_name=None, object_key=object_key)
 
         mock_get_obs_bucket_object_key.assert_called_once_with(None, object_key, "bucket_name", "object_key")
         mock_bucket_client.assert_called_once_with(MOCK_BUCKET_NAME)
-        mock_list_object.assert_called_once_with(prefix=MOCK_OBJECT_KEY, max_keys=1)
+        mock_exist_object.assert_called_once_with(MOCK_OBJECT_KEY)
         self.assertEqual(True, exist)
 
     @mock.patch(OBS_STRING.format("OBSHook.get_obs_bucket_object_key"))
@@ -376,14 +368,14 @@ class TestOBSHook(unittest.TestCase):
     def test_exist_object_if_status_ge_300(self, mock_bucket_client, mock_get_obs_bucket_object_key):
         object_key = f"obs://{MOCK_BUCKET_NAME}/{MOCK_OBJECT_KEY}"
         mock_get_obs_bucket_object_key.return_value = (MOCK_BUCKET_NAME, MOCK_OBJECT_KEY)
-        mock_list_object = mock_bucket_client.return_value.listObjects
-        mock_list_object.return_value = RESP_404
+        mock_exist_object = mock_bucket_client.return_value.headObject
+        mock_exist_object.return_value = RESP_404
 
         exist = self.hook.exist_object(bucket_name=None, object_key=object_key)
 
         mock_get_obs_bucket_object_key.assert_called_once_with(None, object_key, "bucket_name", "object_key")
         mock_bucket_client.assert_called_once_with(MOCK_BUCKET_NAME)
-        mock_list_object.assert_called_once_with(prefix=MOCK_OBJECT_KEY, max_keys=1)
+        mock_exist_object.assert_called_once_with(MOCK_OBJECT_KEY)
         self.assertEqual(False, exist)
 
     @mock.patch(OBS_STRING.format("OBSHook.get_bucket_client"))

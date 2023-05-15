@@ -341,15 +341,11 @@ class OBSHook(HuaweiBaseHook):
         bucket_name, object_key = OBSHook.get_obs_bucket_object_key(
             bucket_name, object_key, "bucket_name", "object_key"
         )
-        resp = self.get_bucket_client(bucket_name).listObjects(prefix=object_key, max_keys=1)
-        object_list = None
+        resp = self.get_bucket_client(bucket_name).headObject(object_key)
         if resp.status < 300:
-            object_list = [content.key for content in resp.body.contents]
-        else:
-            self.log.error("Error message when checking the object: %s", get_err_info(resp))
-        if not object_list:
-            return False
-        return object_key in object_list
+            return True
+        self.log.error("Error message when checking the object: %s", get_err_info(resp))
+        return False
 
     @provide_bucket_name
     def list_object(
