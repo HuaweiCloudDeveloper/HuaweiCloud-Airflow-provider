@@ -627,6 +627,8 @@ class OBSDeleteBatchObjectOperator(BaseOperator):
         If this field is set to True, only objects failed to be deleted will be returned.
     """
 
+    template_fields: Sequence[str] = ("bucket_name", "object_list")
+
     def __init__(
         self,
         object_list: list[str | dict[str, str]],
