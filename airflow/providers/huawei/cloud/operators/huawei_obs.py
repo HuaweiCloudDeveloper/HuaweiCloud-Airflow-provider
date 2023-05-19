@@ -416,6 +416,7 @@ class OBSCreateObjectOperator(BaseOperator):
             "storageClass": storage_class,
             "expires": expires,
         }
+        self.headers = self.headers if any(self.headers.values()) else None
 
     def execute(self, context: Context):
         obs_hook = OBSHook(huaweicloud_conn_id=self.huaweicloud_conn_id, region=self.region)
@@ -625,6 +626,8 @@ class OBSDeleteBatchObjectOperator(BaseOperator):
         If this field is set to False, objects involved in the deletion will be returned.
         If this field is set to True, only objects failed to be deleted will be returned.
     """
+
+    template_fields: Sequence[str] = ("bucket_name", "object_list")
 
     def __init__(
         self,

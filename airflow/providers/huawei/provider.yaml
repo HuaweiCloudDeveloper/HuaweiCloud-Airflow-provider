@@ -127,6 +127,9 @@ hooks:
   - integration-name: Huawei Cloud DWS
     python-modules:
       - airflow.providers.huawei.cloud.hooks.dws
+  - integration-name: Huawei Cloud DWS SQL
+    python-modules:
+      - airflow.providers.huawei.cloud.hooks.dws_sql
   - integration-name: Huawei Cloud SMN
     python-modules:
       - airflow.providers.huawei.cloud.hooks.smn
@@ -143,3 +146,5 @@ hooks:
 connection-types:
   - hook-class-name: airflow.providers.huawei.cloud.hooks.base_huawei_cloud.HuaweiBaseHook
     connection-type: huaweicloud
+  - hook-class-name: airflow.providers.huawei.cloud.hooks.dws_sql.DWSSqlHook
+    connection-type: dws
