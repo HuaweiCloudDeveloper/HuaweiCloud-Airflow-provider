@@ -72,8 +72,6 @@ class OBSListBucketOperator(BaseOperator):
         running Airflow in a distributed manner and huaweicloud_conn_id is None or
         empty, then default obs configuration would be used (and must be
         maintained on each worker node).
-    :param region: OBS region you want to list bucket.
-        By default, the value is obtained from connection corresponding to huaweicloud_conn_id.
     """
 
     def __init__(
@@ -84,10 +82,9 @@ class OBSListBucketOperator(BaseOperator):
     ) -> None:
         super().__init__(**kwargs)
         self.huaweicloud_conn_id = huaweicloud_conn_id
-        self.region = region
 
     def execute(self, context: Context):
-        obs_hook = OBSHook(huaweicloud_conn_id=self.huaweicloud_conn_id, region=self.region)
+        obs_hook = OBSHook(huaweicloud_conn_id=self.huaweicloud_conn_id)
         return obs_hook.list_bucket()
 
 

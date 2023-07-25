@@ -86,7 +86,6 @@ class TestOBSListBucketOperator(unittest.TestCase):
         self.operator = OBSListBucketOperator(
             task_id=MOCK_TASK_ID,
             huaweicloud_conn_id=MOCK_OBS_CONN_ID,
-            region=MOCK_REGION,
         )
 
     @mock.patch("airflow.providers.huawei.cloud.operators.huawei_obs.OBSHook")
@@ -94,5 +93,5 @@ class TestOBSListBucketOperator(unittest.TestCase):
 
         self.operator.execute(MOCK_CONTEXT)
 
-        mock_hook.assert_called_once_with(huaweicloud_conn_id=MOCK_OBS_CONN_ID, region=MOCK_REGION)
+        mock_hook.assert_called_once_with(huaweicloud_conn_id=MOCK_OBS_CONN_ID)
         mock_hook.return_value.list_bucket.assert_called_once_with()
