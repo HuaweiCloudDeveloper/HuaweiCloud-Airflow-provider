@@ -89,5 +89,9 @@ class DWSSqlHook(DbApiHook):
         if raw_cursor:
             conn_args["cursor_factory"] = self._get_cursor(raw_cursor)
 
+        client_encoding = conn.extra_dejson.get("client_encoding", False)
+        if client_encoding:
+            conn_args["client_encoding"] = client_encoding
+
         self.conn = psycopg2.connect(**conn_args)
         return self.conn
