@@ -24,6 +24,14 @@
 Changelog
 ---------
 
+1.1.1
+.....
+
+Bug Fixes
+~~~~~~~~~
+
+* ``Fix mistakenly added install_requires for provider (#22382)``
+
 1.0.0
 .....
 
