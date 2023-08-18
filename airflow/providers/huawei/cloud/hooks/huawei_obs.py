@@ -55,7 +55,7 @@ def provide_bucket_name(func: T) -> T:
         if bound_args.arguments.get("bucket_name") is None and self.huaweicloud_conn_id:
             connection = self.get_connection(self.huaweicloud_conn_id)
             if connection.extra_dejson.get("obs_bucket", None):
-                bound_args.arguments["bucket_name"] = connection.schema
+                bound_args.arguments["bucket_name"] = connection.extra_dejson.get("obs_bucket")
 
         return func(*bound_args.args, **bound_args.kwargs)
 
