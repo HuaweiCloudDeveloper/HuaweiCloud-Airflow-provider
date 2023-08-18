@@ -24,13 +24,20 @@
 Changelog
 ---------
 
+1.0.2
+
+Bug Fixes
+~~~~~~~~~
+
+* ``Fix the Connections extra param obs-bucket (!15)``
+
 1.0.1
 .....
 
 Bug Fixes
 ~~~~~~~~~
 
-* ``Fix mistakenly added install_requires for provider (#22382)``
+* ``Fix mistakenly added install_requires for provider (!12)``
 
 1.0.0
 .....
