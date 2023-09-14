@@ -24,6 +24,14 @@
 Changelog
 ---------
 
+1.0.3
+.....
+
+Bug Fixes
+~~~~~~~~~
+
+* ``Fix the DLISparkCreateBatchJobOperator parameter (!17)``
+
 1.0.2
 .....
 

@@ -461,7 +461,7 @@ class DLISparkCreateBatchJobOperator(BaseOperator):
             list_conf_body=self.list_conf_body,
             list_files_body=self.list_files_body,
             list_groups_body=self.list_groups_body,
-            list_jars_body=self.list_groups_body,
+            list_jars_body=self.list_jars_body,
             list_modules_body=self.list_modules_body,
             list_python_files_body=self.list_python_files_body,
             list_resources_body=self.list_resources_body,
