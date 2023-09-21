@@ -56,7 +56,7 @@ Create a Huawei Cloud MRS cluster and run job
 To create a Huawei Cloud MRS Cluster, run job list, and delete the cluster.
 :class:`~airflow.providers.huawei.cloud.operators.mrs.MRSCreateClusterRunJobOperator`.
 
-.. exampleinclude:: /../../tests/system/providers/huawei/example_dws.py
+.. exampleinclude:: /../../tests/system/providers/huawei/example_mrs.py
     :language: python
     :dedent: 4
     :start-after: [START howto_operator_mrs_create_cluster_run_job_delete_cluster]
@@ -70,7 +70,7 @@ Delete a Huawei Cloud MRS cluster snapshot
 To delete a Huawei Cloud MRS cluster snapshot with cluster id.
 :class:`~airflow.providers.huawei.cloud.operators.mrs.MRSDeleteClusterOperator`.
 
-.. exampleinclude:: /../../tests/system/providers/huawei/example_dws.py
+.. exampleinclude:: /../../tests/system/providers/huawei/example_mrs.py
     :language: python
     :dedent: 4
     :start-after: [START howto_operator_mrs_delete_cluster]
@@ -85,7 +85,7 @@ Waits for an MRS cluster to reach a specific status
 To wait for a MRS cluster to reach a specific status.
 :class:`~airflow.providers.huawei.cloud.sensors.mrs.MRSShowClusterStateSensor`.
 
-.. exampleinclude:: /../../tests/system/providers/huawei/example_dws.py
+.. exampleinclude:: /../../tests/system/providers/huawei/example_mrs.py
     :language: python
     :dedent: 4
     :start-after: [START howto_sensor_mrs_wait_cluster_running]
