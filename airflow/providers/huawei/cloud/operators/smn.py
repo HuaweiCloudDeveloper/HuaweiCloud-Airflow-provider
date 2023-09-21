@@ -43,7 +43,7 @@ class SMNPublishMessageTemplateOperator(BaseOperator):
     :param huaweicloud_conn_id: The Airflow connection used for SMN credentials.
     """
 
-    template_fields: Sequence[str] = ("template_name", "project_id", "topic_urn", "email_subject")
+    template_fields: Sequence[str] = ("template_name", "project_id", "topic_urn", "email_subject", "tags")
     ui_color = "#66c3ff"
 
     def __init__(
