@@ -162,8 +162,8 @@ class DWSHook(HuaweiBaseHook):
         :param vpc_id: VPC ID, which is used for configuring cluster network.
         :param availability_zone: AZ of a cluster For details, see Regions and Endpoints.
         :param user_name: Administrator username for logging in to a GaussDB(DWS) cluster.
-
             The administrator username must:
+
                 - Consist of lowercase letters, digits, or underscores.
                 - Start with a lowercase letter or an underscore.
                 - Contain 1 to 63 characters.
@@ -182,7 +182,6 @@ class DWSHook(HuaweiBaseHook):
         :param number_of_cn: Number of deployed CNs. The value ranges from 2 to the number of cluster nodes.
             The maximum value is 20 and the default value is 3.
         :param enterprise_project_id: Enterprise project. The default enterprise project ID is 0.
-        :param project_id:     Project ID
         """
         public_ip = PublicIp(public_bind_type=public_bind_type, eip_id=eip_id) if public_bind_type else None
         cluster_info = CreateClusterInfo(

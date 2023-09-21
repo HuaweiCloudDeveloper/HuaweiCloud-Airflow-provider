@@ -19,8 +19,20 @@
 Huawei Cloud DWS Operators
 ==========================
 
+Overview
+--------
+
 Airflow to `Data Warehouse Service (DWS) <https://support.huaweicloud.com/intl/en-us/dws/>`__ integration provides
 several operators to manages all the work of setting up, operating, and scaling a data warehouse.
+
+ - :class:`~airflow.providers.huawei.cloud.operators.dws.DWSCreateClusterOperator`
+ - :class:`~airflow.providers.huawei.cloud.operators.dws.DWSCreateClusterSnapshotOperator`
+ - :class:`~airflow.providers.huawei.cloud.operators.dws.DWSDeleteClusterSnapshotOperator`
+ - :class:`~airflow.providers.huawei.cloud.operators.dws.DWSRestoreClusterOperator`
+ - :class:`~airflow.providers.huawei.cloud.operators.dws.DWSDeleteClusterBasedOnSnapshotOperator`
+ - :class:`~airflow.providers.huawei.cloud.operators.dws.DWSDeleteClusterOperator`
+ - :class:`~airflow.providers.huawei.cloud.sensors.dws.DWSClusterSensor`
+ - :class:`~airflow.providers.huawei.cloud.sensors.dws.DWSSnapshotSensor`
 
 Operators
 ---------
