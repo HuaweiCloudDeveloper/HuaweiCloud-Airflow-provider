@@ -22,7 +22,8 @@ Huawei Cloud SMN Operators
 Overview
 --------
 
-Airflow to Huawei Cloud Simple Message Notification (SMN) integration provides several operators to publish and interact with SMN.
+Airflow to Huawei Cloud `Simple Message Notification (SMN) <https://support.huaweicloud.com/intl/en-us/smn/>`__
+integration provides several operators to publish and interact with SMN.
 
  - :class:`~airflow.providers.huawei.cloud.operators.smn.SMNPublishMessageTemplateOperator`
  - :class:`~airflow.providers.huawei.cloud.operators.smn.SMNPublishTextMessageOperator`

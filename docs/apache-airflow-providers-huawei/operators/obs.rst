@@ -19,7 +19,25 @@
 Huawei Cloud OBS Operators
 ==========================
 
+Overview
+--------
+
 Airflow to `Object Storage Service (OBS) <https://support.huaweicloud.com/intl/en-us/obs/>`__ integration provides several operators to manage the life cycle of OBS buckets and objects.
+
+ - :class:`~airflow.providers.huawei.cloud.operators.huawei_obs.OBSCreateBucketOperator`
+ - :class:`~airflow.providers.huawei.cloud.operators.huawei_obs.OBSListBucketOperator`
+ - :class:`~airflow.providers.huawei.cloud.operators.huawei_obs.OBSDeleteBucketOperator`
+ - :class:`~airflow.providers.huawei.cloud.operators.huawei_obs.OBSListObjectsOperator`
+ - :class:`~airflow.providers.huawei.cloud.operators.huawei_obs.OBSGetBucketTaggingOperator`
+ - :class:`~airflow.providers.huawei.cloud.operators.huawei_obs.OBSSetBucketTaggingOperator`
+ - :class:`~airflow.providers.huawei.cloud.operators.huawei_obs.OBSDeleteBucketTaggingOperator`
+ - :class:`~airflow.providers.huawei.cloud.operators.huawei_obs.OBSCreateObjectOperator`
+ - :class:`~airflow.providers.huawei.cloud.operators.huawei_obs.OBSGetObjectOperator`
+ - :class:`~airflow.providers.huawei.cloud.operators.huawei_obs.OBSCopyObjectOperator`
+ - :class:`~airflow.providers.huawei.cloud.operators.huawei_obs.OBSDeleteObjectOperator`
+ - :class:`~airflow.providers.huawei.cloud.operators.huawei_obs.OBSDeleteBatchObjectOperator`
+ - :class:`~airflow.providers.huawei.cloud.operators.huawei_obs.OBSMoveObjectOperator`
+ - :class:`~airflow.providers.huawei.cloud.sensors.huawei_obs_key.OBSObjectKeySensor`
 
 Operators
 ---------
