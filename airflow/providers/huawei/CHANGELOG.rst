@@ -24,6 +24,20 @@
 Changelog
 ---------
 
+1.1.0
+.....
+
+Features
+~~~~~~~~~
+
+* ``Add Huawei Cloud MRS hook,operators, and sensors (!19)``
+* ``Add Huawei Cloud MRS test and example dags (!19)``
+* ``Add "tags" to template_fields for SMNPublishMessageTemplateOperator (!19)``
+* ``Fix the method docstring for create_cluster method of DWSHook (!19)``
+* ``Fix example mrs dags (!19)``
+* ``Add MRS docs and modify other docs (!19)``
+* ``Add MRS dependencies (!19)``
+
 1.0.3
 .....
 
