@@ -115,7 +115,7 @@ Execute a SQL query on DWS
 ==========================
 
 The generic ``SQLExecuteQueryOperator`` can be used to execute SQL queries against an Amazon Redshift cluster using a Postgres connection.
-:class:`~airflow.providers.huawei.cloud.operators.common.sql.SQLExecuteQueryOperator`.
+:class:`~airflow.providers.common.sql.cloud.operators.SQLExecuteQueryOperator`.
 
 .. exampleinclude:: /../../tests/system/providers/common/sql/example_sql_execute_query.py
     :language: python

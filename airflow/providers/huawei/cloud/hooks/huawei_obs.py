@@ -420,11 +420,11 @@ class OBSHook(HuaweiBaseHook):
         :param object_type: The type of the object, default is content.
 
             - file:
-                Full path of the file/folder to be uploaded, for example, /aa/bb.txt, or /aa/.
+              Full path of the file/folder to be uploaded, for example, /aa/bb.txt, or /aa/.
             - content:
-                Upload text to the specified bucket using a string as the data source of the object,
-                or upload data to the specified bucket as a network stream or file stream using a
-                readable object with a "read" attribute as the data source of the object.
+              Upload text to the specified bucket using a string as the data source of the object,
+              or upload data to the specified bucket as a network stream or file stream using a
+              readable object with a "read" attribute as the data source of the object.
         :param data: Object to be uploaded.
             If data is a folder type, the md5 parameter is ignored.
         :param metadata: Upload custom metadata for the object.

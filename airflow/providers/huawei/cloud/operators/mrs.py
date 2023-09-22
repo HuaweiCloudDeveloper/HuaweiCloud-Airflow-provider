@@ -46,30 +46,30 @@ class MRSCreateClusterOperator(BaseOperator):
     :param safe_mode: Running mode of an MRS cluster.
 
         - SIMPLE: normal cluster. In a normal cluster, Kerberos authentication is disabled, and users can
-            use all functions provided by the cluster.
+          use all functions provided by the cluster.
         - KERBEROS: security cluster. In a security cluster, Kerberos authentication is enabled, and
-            common users cannot use the file management and job management functions of an MRS cluster or
-            view cluster resource usage and the job records of Hadoop and Spark. To use more cluster
-            functions, the users must contact the Manager administrator to assign more permissions.
+          common users cannot use the file management and job management functions of an MRS cluster or
+          view cluster resource usage and the job records of Hadoop and Spark. To use more cluster
+          functions, the users must contact the Manager administrator to assign more permissions.
     :param manager_admin_password: Password of the MRS Manager administrator.
         The password must meet the following requirements:
 
             - Must contain 8 to 26 characters.
             - Must contain at least four of the following: uppercase letters, lowercase letters, digits,
-                and special characters (!@$%^-_=+[{}]:,./?), but must not contain spaces.
+              and special characters (!@$%^-_=+[{}]:,./?), but must not contain spaces.
             - Cannot be the username or the username spelled backwards.
     :param login_mode: Node login mode.
 
         - PASSWORD: password-based login. If this value is selected, node_root_password cannot be left
-            blank.
+          blank.
         - KEYPAIR: specifies the key pair used for login. If this value is selected, node_keypair_name
-            cannot be left blank.
+          cannot be left blank.
     :param vpc_name: Name of the VPC where the subnet locates. Perform the following operations to obtain
         the VPC name from the VPC management console:
 
         - Log in to the management console.
         - Click Virtual Private Cloud and select Virtual Private Cloud from the left list. On the Virtual
-            Private Cloud page, obtain the VPC name from the list.
+          Private Cloud page, obtain the VPC name from the list.
     :param subnet_id: Subnet ID
     :param components: List of component names, which are separated by commas (,).
     :param availability_zone: AZ name. Multi-AZ clusters are not supported.
@@ -82,11 +82,11 @@ class MRSCreateClusterOperator(BaseOperator):
     :param security_groups_id: Security group ID of the cluster.
 
         - If this parameter is left blank, MRS automatically creates a security group, whose name starts
-            with mrs_{cluster_name}.
+          with mrs_{cluster_name}.
         - If this parameter is not left blank, a fixed security group is used to create a cluster. The
-            transferred ID must be the security group ID owned by the current tenant. The security group
-            must include an inbound rule in which all protocols and all ports are allowed and the source
-            is the IP address of the specified node on the management plane.
+          transferred ID must be the security group ID owned by the current tenant. The security group
+          must include an inbound rule in which all protocols and all ports are allowed and the source
+          is the IP address of the specified node on the management plane.
         - Multiple security group ids are supported, separated by commas (,).
     :param auto_create_default_security_group: Specifies whether to create the MRS Cluster default
         security group. The default value is false. If this parameter is set to true, a default security
@@ -96,7 +96,7 @@ class MRSCreateClusterOperator(BaseOperator):
 
         - Must be 8 to 26 characters long.
         - Must contain at least four of the following: uppercase letters, lowercase letters, digits, and
-            special characters (!@$%^-_=+[{}]:,./?), but must not contain spaces.
+          special characters (!@$%^-_=+[{}]:,./?), but must not contain spaces.
         - Cannot be the username or the username spelled backwards.
     :param node_keypair_name: Name of a key pair You can use a key pair to log in to the Master node
         in the cluster.
@@ -119,17 +119,17 @@ class MRSCreateClusterOperator(BaseOperator):
     :param template_id: Template used for node deployment when the cluster type is CUSTOM.
 
         - mgmt_control_combined_v2: template for jointly deploying the management and control nodes.
-            The management and control roles are co-deployed on the Master node, and data instances are
-            deployed in the same node group. This deployment mode applies to scenarios where the number
-            of control nodes is less than 100, reducing costs.
+          The management and control roles are co-deployed on the Master node, and data instances are
+          deployed in the same node group. This deployment mode applies to scenarios where the number
+          of control nodes is less than 100, reducing costs.
         - mgmt_control_separated_v2: The management and control roles are deployed on different master
-            nodes, and data instances are deployed in the same node group. This deployment mode is
-            applicable to a cluster with 100 to 500 nodes and delivers better performance in
-            high-concurrency load scenarios.
+          nodes, and data instances are deployed in the same node group. This deployment mode is
+          applicable to a cluster with 100 to 500 nodes and delivers better performance in
+          high-concurrency load scenarios.
         - mgmt_control_data_separated_v2: The management role and control role are deployed on different
-            Master nodes, and data instances are deployed in different node groups. This deployment mode
-            is applicable to a cluster with more than 500 nodes. Components can be deployed separately,
-            which can be used for a larger cluster scale.
+          Master nodes, and data instances are deployed in different node groups. This deployment mode
+          is applicable to a cluster with more than 500 nodes. Components can be deployed separately,
+          which can be used for a larger cluster scale.
     :param tags: Cluster tag For more parameter description.
         A maximum of 10 tags can be added to a cluster, and the tag name (key) must be unique.
     :param log_collection: Specifies whether to collect logs when cluster creation fails.
@@ -190,7 +190,7 @@ class MRSCreateClusterOperator(BaseOperator):
         mrs_ecs_default_agency: str | None = None,
         template_id: str | None = None,
         tags: list[dict] | None = None,
-        log_collection: bool = True,
+        log_collection: int = 1,
         bootstrap_scripts: list[dict] | None = None,
         log_uri: str | None = None,
         component_configs: list[dict] | None = None,
@@ -293,30 +293,30 @@ class MRSCreateClusterRunJobOperator(BaseOperator):
     :param safe_mode: Running mode of an MRS cluster.
 
         - SIMPLE: normal cluster. In a normal cluster, Kerberos authentication is disabled, and users can
-            use all functions provided by the cluster.
+          use all functions provided by the cluster.
         - KERBEROS: security cluster. In a security cluster, Kerberos authentication is enabled, and
-            common users cannot use the file management and job management functions of an MRS cluster or
-            view cluster resource usage and the job records of Hadoop and Spark. To use more cluster
-            functions, the users must contact the Manager administrator to assign more permissions.
+          common users cannot use the file management and job management functions of an MRS cluster or
+          view cluster resource usage and the job records of Hadoop and Spark. To use more cluster
+          functions, the users must contact the Manager administrator to assign more permissions.
     :param manager_admin_password: Password of the MRS Manager administrator.
         The password must meet the following requirements:
 
             - Must contain 8 to 26 characters.
             - Must contain at least four of the following: uppercase letters, lowercase letters, digits,
-                and special characters (!@$%^-_=+[{}]:,./?), but must not contain spaces.
+              and special characters (!@$%^-_=+[{}]:,./?), but must not contain spaces.
             - Cannot be the username or the username spelled backwards.
     :param login_mode: Node login mode.
 
         - PASSWORD: password-based login. If this value is selected, node_root_password cannot be left
-            blank.
+          blank.
         - KEYPAIR: specifies the key pair used for login. If this value is selected, node_keypair_name
-            cannot be left blank.
+          cannot be left blank.
     :param vpc_name: Name of the VPC where the subnet locates. Perform the following operations to obtain
         the VPC name from the VPC management console:
 
         - Log in to the management console.
         - Click Virtual Private Cloud and select Virtual Private Cloud from the left list. On the Virtual
-            Private Cloud page, obtain the VPC name from the list.
+          Private Cloud page, obtain the VPC name from the list.
     :param subnet_id: Subnet ID
     :param components: List of component names, which are separated by commas (,).
     :param availability_zone: AZ name. Multi-AZ clusters are not supported.
@@ -329,11 +329,11 @@ class MRSCreateClusterRunJobOperator(BaseOperator):
     :param security_groups_id: Security group ID of the cluster.
 
         - If this parameter is left blank, MRS automatically creates a security group, whose name starts
-            with mrs_{cluster_name}.
+          with mrs_{cluster_name}.
         - If this parameter is not left blank, a fixed security group is used to create a cluster. The
-            transferred ID must be the security group ID owned by the current tenant. The security group
-            must include an inbound rule in which all protocols and all ports are allowed and the source
-            is the IP address of the specified node on the management plane.
+          transferred ID must be the security group ID owned by the current tenant. The security group
+          must include an inbound rule in which all protocols and all ports are allowed and the source
+          is the IP address of the specified node on the management plane.
         - Multiple security group ids are supported, separated by commas (,).
     :param auto_create_default_security_group: Specifies whether to create the MRS Cluster default
         security group. The default value is false. If this parameter is set to true, a default security
@@ -343,7 +343,7 @@ class MRSCreateClusterRunJobOperator(BaseOperator):
 
         - Must be 8 to 26 characters long.
         - Must contain at least four of the following: uppercase letters, lowercase letters, digits, and
-            special characters (!@$%^-_=+[{}]:,./?), but must not contain spaces.
+          special characters (!@$%^-_=+[{}]:,./?), but must not contain spaces.
         - Cannot be the username or the username spelled backwards.
     :param node_keypair_name: Name of a key pair You can use a key pair to log in to the Master node
         in the cluster.
@@ -366,17 +366,17 @@ class MRSCreateClusterRunJobOperator(BaseOperator):
     :param template_id: Template used for node deployment when the cluster type is CUSTOM.
 
         - mgmt_control_combined_v2: template for jointly deploying the management and control nodes.
-            The management and control roles are co-deployed on the Master node, and data instances are
-            deployed in the same node group. This deployment mode applies to scenarios where the number
-            of control nodes is less than 100, reducing costs.
+          The management and control roles are co-deployed on the Master node, and data instances are
+          deployed in the same node group. This deployment mode applies to scenarios where the number
+          of control nodes is less than 100, reducing costs.
         - mgmt_control_separated_v2: The management and control roles are deployed on different master
-            nodes, and data instances are deployed in the same node group. This deployment mode is
-            applicable to a cluster with 100 to 500 nodes and delivers better performance in
-            high-concurrency load scenarios.
+          nodes, and data instances are deployed in the same node group. This deployment mode is
+          applicable to a cluster with 100 to 500 nodes and delivers better performance in
+          high-concurrency load scenarios.
         - mgmt_control_data_separated_v2: The management role and control role are deployed on different
-            Master nodes, and data instances are deployed in different node groups. This deployment mode
-            is applicable to a cluster with more than 500 nodes. Components can be deployed separately,
-            which can be used for a larger cluster scale.
+          Master nodes, and data instances are deployed in different node groups. This deployment mode
+          is applicable to a cluster with more than 500 nodes. Components can be deployed separately,
+          which can be used for a larger cluster scale.
     :param tags: Cluster tag For more parameter description.
         A maximum of 10 tags can be added to a cluster, and the tag name (key) must be unique.
     :param log_collection: Specifies whether to collect logs when cluster creation fails.
@@ -441,7 +441,7 @@ class MRSCreateClusterRunJobOperator(BaseOperator):
         mrs_ecs_default_agency: str | None = None,
         template_id: str | None = None,
         tags: list[dict] | None = None,
-        log_collection: bool = True,
+        log_collection: int = 1,
         bootstrap_scripts: list[dict] | None = None,
         log_uri: str | None = None,
         component_configs: list[dict] | None = None,
