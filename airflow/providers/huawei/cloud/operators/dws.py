@@ -60,7 +60,7 @@ class DWSCreateClusterOperator(BaseOperator):
 
         - Contains 8 to 32 characters.
         - Contains at least three types of the following characters: uppercase letters, lowercase letters,
-            digits, and special characters (~!?, .:;-_(){}[]/<>@# %^&*+|\=).
+          digits, and special characters (~!?, .:;-_(){}[]/<>@# %^&*+|\=).
         - Cannot be the same as the username or the username written in reverse order.
     :param port: Service port of a cluster. The value ranges from 8000 to 30000. The default value is 8000.
     :param public_bind_type: Binding type of EIP. The value can be one of the following:

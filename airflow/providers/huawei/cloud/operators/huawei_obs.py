@@ -340,11 +340,11 @@ class OBSCreateObjectOperator(BaseOperator):
     :param object_type: The type of the object, default is content.
 
         - file:
-            Full path of the file/folder to be uploaded, for example, /aa/bb.txt, or /aa/.
+          Full path of the file/folder to be uploaded, for example, /aa/bb.txt, or /aa/.
         - content:
-            Upload text to the specified bucket using a string as the data source of the object,
-            or upload data to the specified bucket as a network stream or file stream using a
-            readable object with a "read" attribute as the data source of the object.
+          Upload text to the specified bucket using a string as the data source of the object,
+          or upload data to the specified bucket as a network stream or file stream using a
+          readable object with a "read" attribute as the data source of the object.
     :param data: Object to be uploaded.
         If data is a folder type, the md5 parameter is ignored.
     :param metadata: Upload custom metadata for the object.
@@ -357,22 +357,22 @@ class OBSCreateObjectOperator(BaseOperator):
             - PUBLIC_READ: Public read.
             - PUBLIC_READ_WRITE: Public read/write.
             - BUCKET_OWNER_FULL_CONTROL: The owner of a bucket or object has the full control permission on
-                the bucket or object.
+              the bucket or object.
     :param storage_class: Storage Classes, which can be specified during the object creation.
         The access policy is as follows:
 
             - STANDARD:
-                Standard storage class.
-                Features low access latency and high throughput and is applicable
-                to storing frequently-accessed (multiple times per month) hotspot
-                or small objects (< 1 MB) requiring quick response.
+              Standard storage class.
+              Features low access latency and high throughput and is applicable
+              to storing frequently-accessed (multiple times per month) hotspot
+              or small objects (< 1 MB) requiring quick response.
             - WARM:
-                Infrequent Access storage class.
-                Applicable to storing semi-frequently accessed (less than 12 times a year) data
-                requiring quick response.
+              Infrequent Access storage class.
+              Applicable to storing semi-frequently accessed (less than 12 times a year) data
+              requiring quick response.
             - COLD:
-                Archive storage class.
-                Applicable to archiving rarely-accessed (once a year) data.
+              Archive storage class.
+              Applicable to archiving rarely-accessed (once a year) data.
     :param expires: Expiration time of an object to be uploaded, in days.
     :param encryption: Algorithm used in SSE-KMS encryption. The value can be:kms
     :param key: The key used in SSE-KMS encryption. The value can be None.
@@ -498,7 +498,7 @@ class OBSCopyObjectOperator(BaseOperator):
 
             - COPY: Default value; Attributes of the target object are copied from the source object.
             - REPLACE: Attributes of the target object are replaced with values specified in the request
-                parameter.
+              parameter.
     :param acl: Pre-set access policies, which can be specified during object copy.
         The access policy is as follows:
 
@@ -506,7 +506,7 @@ class OBSCopyObjectOperator(BaseOperator):
             - PUBLIC_READ: Public read.
             - PUBLIC_READ_WRITE: Public read/write.
             - BUCKET_OWNER_FULL_CONTROL: The owner of a bucket or object has the full control permission on
-                the bucket or object.
+              the bucket or object.
     """
 
     template_fields: Sequence[str] = (

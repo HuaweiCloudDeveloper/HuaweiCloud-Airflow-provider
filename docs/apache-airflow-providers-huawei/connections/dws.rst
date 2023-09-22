@@ -34,24 +34,25 @@ Configuring the Connection
 --------------------------
 
 Host (optional)
-  Specify the Huawei Cloud DWS cluster endpoint.
+    Specify the Huawei Cloud DWS cluster endpoint.
 
 Schema (optional)
-  Specify the Huawei Cloud DWS database name.
+    Specify the Huawei Cloud DWS database name.
 
 Login (optional)
-  Specify the username to use for authentication with Huawei Cloud DWS.
+    Specify the username to use for authentication with Huawei Cloud DWS.
 
 Password (optional)
-  Specify the password to use for authentication with Huawei Cloud DWS.
+    Specify the password to use for authentication with Huawei Cloud DWS.
 
 Port (optional)
-  Specify the port to use to interact with Huawei Cloud DWS.
+    Specify the port to use to interact with Huawei Cloud DWS.
 
 Extra (optional)
     Specify the extra parameters (as json dictionary) that can be used in
-    Huawei Cloud DWS connection. For a complete list of supported parameters
+    Huawei Cloud DWS connection.
 
+    * ``client_encoding``: specifies client encoding(character set) of the client connection.
 
 Examples
 --------------------------------
@@ -63,3 +64,12 @@ Examples
 * **Login**: ``dwsuser``
 * **Password**: ``********``
 * **Port**: ``8000``
+
+Examples for the **Extra** field
+--------------------------------
+
+.. code-block:: json
+
+    {
+      "client_encoding": "utf-8"
+    }
