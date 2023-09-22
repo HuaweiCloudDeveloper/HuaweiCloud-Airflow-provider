@@ -29,7 +29,29 @@ from airflow.providers.huawei.cloud.hooks.mrs import MRSHook
 
 
 class MRSShowClusterStateSensor(BaseSensorOperator):
-    """Sensor for checking the state of an MRS cluster."""
+    """
+    Sensor for checking the state of an MRS cluster.
+
+    :param cluster_id: The cluster ID.
+    :param target_status: The cluster status desired.
+
+        - starting: The cluster is being started.
+        - running: The cluster is running.
+        - terminated: The cluster has been deleted.
+        - failed: The cluster is failed.
+        - abnormal: The cluster is abnormal.
+        - terminating: The cluster is being deleted.
+        - frozen: The cluster is frozen.
+        - scaling-out: The cluster is being scaled out.
+        - scaling-in: The cluster is being scaled in.
+    :param region: The MRS region.
+    :param project_id: Project ID.
+    :param huaweicloud_conn_id: The Airflow connection used for MRS credentials.
+        If this is None or empty then the default obs behaviour is used. If
+        running Airflow in a distributed manner and huaweicloud_conn_id is None or
+        empty, then default obs configuration would be used (and must be
+        maintained on each worker node).
+    """
     FAILURE_STATES = ("failed", "abnormal")
 
     template_fields: Sequence[str] = ("cluster_id",)
