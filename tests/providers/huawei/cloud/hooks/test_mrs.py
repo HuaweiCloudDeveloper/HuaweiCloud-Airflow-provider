@@ -55,7 +55,7 @@ MOCK_EIP_ID = "mock_eip_id"
 MOCK_MRS_ECS_DEFAULT_AGENCY = "mock_mrs_ecs_default_agency"
 MOCK_TEMPLATE_ID = "mock_template_id"
 MOCK_TAGS = [{'key': 'creator', 'value': 'airflow'}, {'key': 'create_time', 'value': '20230918'}]
-MOCK_LOG_COLLECTION = True
+MOCK_LOG_COLLECTION = 1
 MOCK_BOOTSTRAP_SCRIPTS = [mock.MagicMock(spec=dict)]
 MOCK_LOG_URI = "mock_log_uri"
 MOCK_COMPONENT_CONFIGS = [mock.MagicMock(spec=dict)]

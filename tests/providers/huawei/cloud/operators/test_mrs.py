@@ -55,7 +55,7 @@ MOCK_EIP_ID = "mock_eip_id"
 MOCK_MRS_ECS_DEFAULT_AGENCY = "mock_mrs_ecs_default_agency"
 MOCK_TEMPLATE_ID = "mock_template_id"
 MOCK_TAGS = [{'key': 'creator', 'value': 'airflow'}, {'key': 'create_time', 'value': '20230918'}]
-MOCK_LOG_COLLECTION = True
+MOCK_LOG_COLLECTION = 1
 MOCK_BOOTSTRAP_SCRIPTS = [mock.MagicMock(spec=dict)]
 MOCK_LOG_URI = "mock_log_uri"
 MOCK_COMPONENT_CONFIGS = [mock.MagicMock(spec=dict)]
@@ -81,7 +81,7 @@ class TestMRSCreateClusterOperator(TestCase):
             availability_zone=MOCK_AVAILABILITY_ZONE,
             node_groups=MOCK_NODE_GROUPS,
             is_dec_project=MOCK_IS_DEC_PROJECT,
-            subnet_name=MOCK_CHARGE_INFO,
+            subnet_name=MOCK_SUBNET_NAME,
             external_datasources=MOCK_EXTERNAL_DATASOURCES,
             security_groups_id=MOCK_SECURITY_GROUPS_ID,
             auto_create_default_security_group=MOCK_AUTO_CREATE_DEFAULT_SECURITY_GROUP,
@@ -109,6 +109,8 @@ class TestMRSCreateClusterOperator(TestCase):
             huaweicloud_conn_id=MOCK_MRS_CONN_ID, region=MOCK_REGION, project_id=MOCK_PROJECT_ID
         )
         mock_hook.return_value.create_cluster.assert_called_once_with(
+            charge_info=None,
+            is_dec_project=MOCK_IS_DEC_PROJECT,
             cluster_version=MOCK_CLUSTER_VERSION,
             cluster_name=MOCK_CLUSTER_NAME,
             cluster_type=MOCK_CLUSTER_TYPE,
@@ -120,8 +122,7 @@ class TestMRSCreateClusterOperator(TestCase):
             components=MOCK_COMPONENTS,
             availability_zone=MOCK_AVAILABILITY_ZONE,
             node_groups=MOCK_NODE_GROUPS,
-            is_dec_project=MOCK_IS_DEC_PROJECT,
-            subnet_name=MOCK_CHARGE_INFO,
+            subnet_name=MOCK_SUBNET_NAME,
             external_datasources=MOCK_EXTERNAL_DATASOURCES,
             security_groups_id=MOCK_SECURITY_GROUPS_ID,
             auto_create_default_security_group=MOCK_AUTO_CREATE_DEFAULT_SECURITY_GROUP,
@@ -158,7 +159,7 @@ class TestMRSCreateClusterRunJobOperator(TestCase):
             availability_zone=MOCK_AVAILABILITY_ZONE,
             node_groups=MOCK_NODE_GROUPS,
             is_dec_project=MOCK_IS_DEC_PROJECT,
-            subnet_name=MOCK_CHARGE_INFO,
+            subnet_name=MOCK_SUBNET_NAME,
             external_datasources=MOCK_EXTERNAL_DATASOURCES,
             security_groups_id=MOCK_SECURITY_GROUPS_ID,
             auto_create_default_security_group=MOCK_AUTO_CREATE_DEFAULT_SECURITY_GROUP,
@@ -187,6 +188,7 @@ class TestMRSCreateClusterRunJobOperator(TestCase):
         )
         mock_hook.return_value.create_cluster_run_job.assert_called_once_with(
             steps=MOCK_STEPS,
+            charge_info=None,
             delete_when_no_steps=MOCK_DELETE_WHEN_NO_STEPS,
             cluster_version=MOCK_CLUSTER_VERSION,
             cluster_name=MOCK_CLUSTER_NAME,
@@ -200,7 +202,7 @@ class TestMRSCreateClusterRunJobOperator(TestCase):
             availability_zone=MOCK_AVAILABILITY_ZONE,
             node_groups=MOCK_NODE_GROUPS,
             is_dec_project=MOCK_IS_DEC_PROJECT,
-            subnet_name=MOCK_CHARGE_INFO,
+            subnet_name=MOCK_SUBNET_NAME,
             external_datasources=MOCK_EXTERNAL_DATASOURCES,
             security_groups_id=MOCK_SECURITY_GROUPS_ID,
             auto_create_default_security_group=MOCK_AUTO_CREATE_DEFAULT_SECURITY_GROUP,
