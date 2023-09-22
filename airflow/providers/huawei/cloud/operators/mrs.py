@@ -147,10 +147,10 @@ class MRSCreateClusterOperator(BaseOperator):
     :param component_configs: User-defined configuration for cluster components. This parameter applies
         only to cluster versions that support the Customize Component Configuration Create Cluster feature.
     :param project_id: Project ID.
-    :param region: The DWS region.
+    :param region: The MRS region.
         By default, the value is obtained from connection corresponding to huaweicloud_conn_id.
         Be associated with project_id.
-    :param huaweicloud_conn_id: The Airflow connection used for DWS credentials.
+    :param huaweicloud_conn_id: The Airflow connection used for MRS credentials.
         If this is None or empty then the default obs behaviour is used. If running Airflow in a distributed
         manner and huaweicloud_conn_id is None or empty, then default obs configuration would be used (and
         must be maintained on each worker node).
@@ -396,10 +396,10 @@ class MRSCreateClusterRunJobOperator(BaseOperator):
     :param delete_when_no_steps: Whether to automatically delete the cluster after the job is complete.
         The default value is false.
     :param project_id: Project ID.
-    :param region: The DWS region.
+    :param region: The MRS region.
         By default, the value is obtained from connection corresponding to huaweicloud_conn_id.
         Be associated with project_id.
-    :param huaweicloud_conn_id: The Airflow connection used for DWS credentials.
+    :param huaweicloud_conn_id: The Airflow connection used for MRS credentials.
         If this is None or empty then the default obs behaviour is used. If running Airflow in a distributed
         manner and huaweicloud_conn_id is None or empty, then default obs configuration would be used (and
         must be maintained on each worker node).
