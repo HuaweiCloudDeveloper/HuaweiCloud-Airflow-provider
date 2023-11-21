@@ -259,14 +259,14 @@ class DLIListQueuesOperator(BaseOperator):
             huaweicloud_conn_id=self.huaweicloud_conn_id, region=self.region, project_id=self.project_id
         )
 
-        list = dli_hook.list_queues(
+        queue_list = dli_hook.list_queues(
             queue_type=self.queue_type,
             tags=self.tags,
             return_billing_info=self.return_billing_info,
             return_permission_info=self.return_permission_info,
         ).to_dict()
 
-        return list["queues"]
+        return queue_list["queues"]
 
 
 class DLISparkCreateBatchJobOperator(BaseOperator):
@@ -571,7 +571,7 @@ class DLIRunSqlJobOperator(BaseOperator):
             huaweicloud_conn_id=self.huaweicloud_conn_id, region=self.region, project_id=self.project_id
         )
 
-        return dli_hook.run_job(
+        return dli_hook.create_sql_job(
             sql_query=self.sql_query,
             database_name=self.database_name,
             queue_name=self.queue_name,

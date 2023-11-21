@@ -119,20 +119,20 @@ class TestDliHook(unittest.TestCase):
         )
         list_queues.assert_called_once_with(request)
 
-    @mock.patch(DLI_STRING.format("DliSdk.DliClient.show_job_result"))
-    def test_get_job_result(self, show_job_result):
+    @mock.patch(DLI_STRING.format("DliSdk.DliClient.preview_job_result"))
+    def test_get_job_result(self, preview_job_result):
         job_id = "job-id"
         queue_name = "queue_name"
         self.hook.get_job_result(queue_name=queue_name, job_id=job_id)
         request = self.hook.get_job_result_request(queue_name=queue_name, job_id=job_id)
-        show_job_result.assert_called_once_with(request)
+        preview_job_result.assert_called_once_with(request)
 
-    @mock.patch(DLI_STRING.format("DliSdk.DliClient.show_job_status"))
-    def test_show_job_status(self, show_job_status):
+    @mock.patch(DLI_STRING.format("DliSdk.DliClient.show_sql_job_status"))
+    def test_show_sql_job_status(self, show_sql_job_status):
         job_id = "job-id"
-        self.hook.show_job_status(job_id=job_id)
-        request = self.hook.show_job_status_request(job_id)
-        show_job_status.assert_called_once_with(request)
+        self.hook.show_sql_job_status(job_id=job_id)
+        request = self.hook.show_sql_job_status_request(job_id)
+        show_sql_job_status.assert_called_once_with(request)
 
     @mock.patch(DLI_STRING.format("DliSdk.DliClient.show_batch_state"))
     def test_show_batch_state(self, show_batch_state):
@@ -141,21 +141,21 @@ class TestDliHook(unittest.TestCase):
         request = self.hook.show_batch_state_request(job_id)
         show_batch_state.assert_called_once_with(request)
 
-    @mock.patch(DLI_STRING.format("DliSdk.DliClient.run_job"))
-    def test_run_job(self, run_job):
+    @mock.patch(DLI_STRING.format("DliSdk.DliClient.create_sql_job"))
+    def test_create_sql_job(self, run_job):
         queue_name = "queue_name"
         currentdb = "current-db"
         sql = "sql-query"
         tags = "tags"
         conf = "list"
-        self.hook.run_job(
+        self.hook.create_sql_job(
             queue_name=queue_name,
             database_name=currentdb,
             list_conf_body=conf,
             list_tags_body=tags,
             sql_query=sql,
         )
-        request = self.hook.run_job_request(
+        request = self.hook.create_sql_job_request(
             queue_name=queue_name,
             database_name=currentdb,
             list_conf_body=conf,

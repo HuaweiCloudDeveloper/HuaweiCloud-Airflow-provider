@@ -257,11 +257,11 @@ class DLIHook(HuaweiBaseHook):
             self.log.error(e)
             raise AirflowException(f"Errors when uploading files: {e}")
 
-    def run_job(
+    def create_sql_job(
         self, sql_query, database_name, queue_name, list_conf_body, list_tags_body
-    ) -> DliSdk.RunJobResponse:
+    ) -> DliSdk.CreateSqlJobResponse:
         """
-        Run a job in DLI
+        Submit SQL job in DLI
 
         :param sql_query: The SQL query of the job.
         :param database_name: The database name of the job.
@@ -277,8 +277,8 @@ class DLIHook(HuaweiBaseHook):
                 sql_query = sql_file.read()
                 sql_file.close()
 
-            return self.get_dli_client().run_job(
-                self.run_job_request(
+            return self.get_dli_client().create_sql_job(
+                self.create_sql_job_request(
                     sql_query=sql_query,
                     database_name=database_name,
                     list_conf_body=list_conf_body,
@@ -305,7 +305,7 @@ class DLIHook(HuaweiBaseHook):
             self.log.error(e)
             raise AirflowException(f"Errors when get batch state: {e}")
 
-    def show_job_status(self, job_id) -> str:
+    def show_sql_job_status(self, job_id) -> str:
         """
         Get the status of a job
 
@@ -314,7 +314,7 @@ class DLIHook(HuaweiBaseHook):
         :rtype: str
         """
         try:
-            response = self.get_dli_client().show_job_status(self.show_job_status_request(job_id))
+            response = self.get_dli_client().show_sql_job_status(self.show_sql_job_status_request(job_id))
             return response.status
         except Exception as e:
             self.log.error(e)
@@ -333,15 +333,15 @@ class DLIHook(HuaweiBaseHook):
             .build()
         )
 
-    def show_job_status_request(self, job_id):
-        return DliSdk.ShowJobStatusRequest(job_id)
+    def show_sql_job_status_request(self, job_id):
+        return DliSdk.ShowSqlJobStatusRequest(job_id)
 
     def show_batch_state_request(self, job_id):
         return DliSdk.ShowBatchStateRequest(job_id)
 
-    def run_job_request(self, sql_query, database_name, queue_name, list_conf_body, list_tags_body):
-        request = DliSdk.RunJobRequest()
-        request.body = DliSdk.CommitJobReq(
+    def create_sql_job_request(self, sql_query, database_name, queue_name, list_conf_body, list_tags_body):
+        request = DliSdk.CreateSqlJobRequest()
+        request.body = DliSdk.CreateSqlJobRequestBody(
             queue_name=queue_name,
             currentdb=database_name,
             sql=sql_query,
@@ -385,7 +385,7 @@ class DLIHook(HuaweiBaseHook):
         cluster_name,
     ):
         request = DliSdk.CreateBatchJobRequest()
-        request.body = DliSdk.CreateBatchJobReq(
+        request.body = DliSdk.BatchJobInfo(
             queue=queue_name,
             file=file,
             class_name=class_name,
@@ -407,7 +407,7 @@ class DLIHook(HuaweiBaseHook):
             resources=list_resources_body,
             modules=list_modules_body,
             files=list_files_body,
-            python_files=list_python_files_body,
+            py_files=list_python_files_body,
             jars=list_jars_body,
             sc_type=sc_type,
             args=list_args_body,
@@ -464,14 +464,14 @@ class DLIHook(HuaweiBaseHook):
         )
         return request
 
-    def get_job_result(self, job_id, queue_name) -> DliSdk.ShowJobResultResponse:
+    def get_job_result(self, job_id, queue_name) -> DliSdk.PreviewJobResultResponse:
         try:
-            response = self.get_dli_client().show_job_result(self.get_job_result_request(job_id, queue_name))
+            response = self.get_dli_client().preview_job_result(self.get_job_result_request(job_id, queue_name))
             return response
         except Exception as e:
             self.log.error(e)
             raise AirflowException(f"Errors when get job result: {e}")
 
     def get_job_result_request(self, job_id, queue_name):
-        request = DliSdk.ShowJobResultRequest(job_id=job_id, queue_name=queue_name)
+        request = DliSdk.PreviewJobResultRequest(job_id=job_id, queue_name=queue_name)
         return request

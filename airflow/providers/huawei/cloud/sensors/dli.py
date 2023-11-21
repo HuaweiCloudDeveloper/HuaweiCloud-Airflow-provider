@@ -98,7 +98,7 @@ class DLISqlShowJobStatusSensor(BaseSensorOperator):
         self.region = region
 
     def poke(self, context: Context) -> bool:
-        state = self.get_hook.show_job_status(job_id=self.job_id)
+        state = self.get_hook.show_sql_job_status(job_id=self.job_id)
         if state in self.FAILURE_STATES:
             raise AirflowException("DLI sensor failed")
 

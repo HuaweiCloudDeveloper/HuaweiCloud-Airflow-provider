@@ -35,7 +35,7 @@ dependencies:
   - esdk-obs-python>=3.22.2
   - huaweicloudsdkdws>=3.1.21
   - huaweicloudsdksmn>=3.1.19
-  - huaweicloudsdkdli==3.1.19
+  - huaweicloudsdkdli==3.1.66
   - huaweicloudsdkcdm>=3.1.19
   - huaweicloudsdkdlf>=3.1.19
   - huaweicloudsdkiam>=3.1.19

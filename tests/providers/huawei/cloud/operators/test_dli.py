@@ -57,6 +57,7 @@ MOCK_NUM_EXECUTORS = 10
 MOCK_MAX_RETRY_TIMES = 20
 MOCK_LIST_ARGS_BODY = []
 MOCK_LIST_CONF_BODY = []
+MOCK_BATCH_JOB_CONF = {}
 
 MOCK_CHARGING_MODE = 1
 MOCK_CU_COUNT = 16
@@ -108,7 +109,7 @@ class TestDLISparkCreateBatchJobOperator(unittest.TestCase):
             num_executors=MOCK_NUM_EXECUTORS,
             max_retry_times=MOCK_MAX_RETRY_TIMES,
             list_args_body=MOCK_LIST_ARGS_BODY,
-            list_conf_body=MOCK_LIST_CONF_BODY,
+            list_conf_body=MOCK_BATCH_JOB_CONF,
         )
         operator.execute(None)
         mock_hook.assert_called_once_with(
@@ -265,7 +266,7 @@ class TestDLIRunSqlJobOperator(unittest.TestCase):
         mock_hook.assert_called_once_with(
             huaweicloud_conn_id=MOCK_DLI_CONN_ID, region=MOCK_REGION, project_id=MOCK_PROJECT_ID
         )
-        mock_hook.return_value.run_job.assert_called_once_with(
+        mock_hook.return_value.create_sql_job.assert_called_once_with(
             database_name=MOCK_DATABASE_NAME,
             list_conf_body=MOCK_LIST_CONF_BODY,
             list_tags_body=MOCK_LIST_TAGS_BODY,

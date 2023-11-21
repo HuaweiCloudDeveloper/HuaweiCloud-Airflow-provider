@@ -57,14 +57,14 @@ class TestDLISensor(unittest.TestCase):
     @mock.patch(DLI_SENSOR_STRING.format("DLISqlShowJobStatusSensor.get_hook"), new_callable=PropertyMock)
     def test_poke_show_job_status(self, mock_service):
         # Given
-        mock_service.return_value.show_job_status.return_value = True
+        mock_service.return_value.show_sql_job_status.return_value = True
 
         # When
         res = self.job_status_sensor.poke(None)
 
         # Then
         assert res is True
-        mock_service.return_value.show_job_status.assert_called_once_with(job_id=MOCK_JOB_ID)
+        mock_service.return_value.show_sql_job_status.assert_called_once_with(job_id=MOCK_JOB_ID)
 
     @mock.patch(DLI_SENSOR_STRING.format("DLISparkShowBatchStateSensor.get_hook"), new_callable=PropertyMock)
     def test_poke_show_batch_state(self, mock_service):
