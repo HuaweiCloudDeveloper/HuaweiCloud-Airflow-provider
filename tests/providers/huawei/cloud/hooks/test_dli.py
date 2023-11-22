@@ -270,8 +270,8 @@ class TestDliHook(unittest.TestCase):
         )
         create_batch_job.assert_called_once_with(request)
 
-    @mock.patch(DLI_STRING.format("DliSdk.DliClient.call_api"))
-    def test_create_queue_calls_api(self, call_api):
+    @mock.patch(DLI_STRING.format("DliSdk.DliClient._call_api"))
+    def test_create_queue_calls_api(self, _call_api):
         queue_name = "test_queue"
         charging_mode = {"key": "value"}
         cu_count = "test"
@@ -312,7 +312,7 @@ class TestDliHook(unittest.TestCase):
             queue_type=queue_type,
             resource_mode=resource_mode,
         )
-        call_api.assert_called_once_with(
+        _call_api.assert_called_once_with(
             resource_path="/v1.0/{project_id}/queues",
             method="POST",
             path_params={},
@@ -323,7 +323,6 @@ class TestDliHook(unittest.TestCase):
             cname=None,
             response_type="CreateQueueResponse",
             response_headers=[],
-            auth_settings=[],
             collection_formats={},
             request_type="CreateQueueRequest",
         )
